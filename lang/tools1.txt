@@ -1,0 +1,534 @@
+# sshlobby language file: tool registry and shared tool helpers (lib/tools.sh), server check
+# (lib/tools_check.sh), container resources (lib/tools_resources.sh), container hygiene
+# (lib/tools_hygiene.sh). Format: see the head of lang/strings.txt.
+
+# ─── Shared helpers (tl_*) ──────────────────────────────────────────────────
+[tools.none]
+de = keine
+en = none
+
+[tools.hint]
+de = Vorschlag, nicht ausgeführt:
+en = Suggestion, not run:
+
+# ─── Incus overview ─────────────────────────────────────────────────────────
+[tools.incus_overview.title]
+de = Incus-Übersicht (live)
+en = Incus overview (live)
+
+[tools.incus_overview.page]
+de = Incus-Übersicht
+en = Incus overview
+
+# ─── RAM / disk / top processes ─────────────────────────────────────────────
+[tools.sysinfo.title]
+de = RAM / Disk / Top-Prozesse
+en = RAM / disk / top processes
+
+[tools.sysinfo.mem_head]
+de = Arbeitsspeicher und Swap
+en = Memory and swap
+
+[tools.sysinfo.ram_used]
+de = RAM belegt
+en = RAM used
+
+[tools.sysinfo.swap_used]
+de = Swap belegt
+en = Swap used
+
+[tools.sysinfo.used_of]
+de = %s von %s (%d %%)
+en = %s of %s (%d %%)
+
+[tools.sysinfo.swap]
+de = Swap
+en = Swap
+
+[tools.sysinfo.no_swap]
+de = keiner eingerichtet
+en = not configured
+
+[tools.sysinfo.swap_head]
+de = Swap nach Prozess
+en = Swap by process
+
+[tools.sysinfo.swap_no_data]
+de = keine Angaben (vollständig nur als root)
+en = no data (complete only as root)
+
+[tools.sysinfo.fs_head]
+de = Dateisysteme
+en = Filesystems
+
+[tools.sysinfo.top_ram]
+de = Top-Prozesse nach RAM
+en = Top processes by RAM
+
+[tools.sysinfo.top_cpu]
+de = Top-Prozesse nach CPU
+en = Top processes by CPU
+
+# ─── Error log ──────────────────────────────────────────────────────────────
+[tools.errlog.title]
+de = Fehler-Log
+en = Error log
+
+[tools.errlog.desc]
+de = nach Unit, failed, Container
+en = by unit, failed, containers
+
+[tools.errlog.page]
+de = Fehler-Log (journalctl -p err)
+en = Error log (journalctl -p err)
+
+[tools.errlog.failed_head]
+de = Fehlgeschlagene Units
+en = Failed units
+
+[tools.errlog.by_unit_head]
+de = Fehler der letzten 24 h nach Unit (seit Boot, falls jünger)
+en = Errors in the last 24 h by unit (since boot, if more recent)
+
+[tools.errlog.distinct]
+de = (%d verschiedene Meldungen)
+en = (%d distinct messages)
+
+[tools.errlog.ctr_head]
+de = Container-Probleme (unhealthy, OOM, Neustarts, Abbruch)
+en = Container problems (unhealthy, OOM, restarts, exits)
+
+[tools.errlog.last_head]
+de = Letzte 40 Fehlermeldungen
+en = Last 40 error messages
+
+[tools.errlog.binary]
+de = (binäre Meldung)
+en = (binary message)
+
+# Container problems (error log and server check)
+[tools.ctr.restarting]
+de = startet ständig neu (%s)
+en = keeps restarting (%s)
+
+[tools.ctr.oom]
+de = vom OOM-Killer beendet (Speicherlimit)
+en = killed by the OOM killer (memory limit)
+
+[tools.ctr.restarts]
+de = %s Neustarts seit dem Anlegen
+en = %s restarts since creation
+
+[tools.ctr.exit]
+de = beendet mit Exit-Code %s
+en = exited with code %s
+
+[tools.ctr.sigkill]
+de = (SIGKILL, oft OOM oder docker kill)
+en = (SIGKILL, often OOM or docker kill)
+
+# ─── Docker health scan ─────────────────────────────────────────────────────
+[tools.health.title]
+de = Docker-Health-Scan
+en = Docker health scan
+
+[tools.health.desc]
+de = unhealthy, gestoppt, ok
+en = unhealthy, stopped, ok
+
+[tools.health.single]
+de = Einzelcontainer
+en = standalone
+
+[tools.health.partial]
+de = %d/%d laufen, gestoppt: %s
+en = %d/%d running, stopped: %s
+
+[tools.health.running]
+de = (%d laufend)
+en = (%d running)
+
+[tools.health.stopped]
+de = gestoppt
+en = stopped
+
+[tools.health.unreachable]
+de = Docker nicht erreichbar
+en = Docker unreachable
+
+[tools.health.no_docker]
+de = kein Docker
+en = no Docker
+
+# ─── Other server (SSH) ─────────────────────────────────────────────────────
+[tools.ssh.title]
+de = Anderer Server (SSH)
+en = Other server (SSH)
+
+[tools.ssh.desc]
+de = SSH_HOSTS oder ~/.ssh/config
+en = SSH_HOSTS or ~/.ssh/config
+
+[tools.ssh.sub_config]
+de = SSH_HOSTS aus der Config
+en = SSH_HOSTS from the config
+
+[tools.ssh.sub_ssh_config]
+de = Hosts aus ~/.ssh/config
+en = Hosts from ~/.ssh/config
+
+[tools.ssh.back]
+de = — zurück von %s —
+en = — back from %s —
+
+# ─── Mutagen ────────────────────────────────────────────────────────────────
+[tools.mutagen.title]
+de = Mutagen-Sync Status
+en = Mutagen sync status
+
+# ─── CVE monitor ────────────────────────────────────────────────────────────
+[tools.cve.title]
+de = CVE-Monitor: neue Alerts
+en = CVE monitor: new alerts
+
+[tools.cve.desc]
+de = CVE_CT/CVE_DIR aus der Config
+en = CVE_CT/CVE_DIR from the config
+
+[tools.cve.page]
+de = CVE-Monitor
+en = CVE monitor
+
+[tools.cve.head]
+de = Neue CVE-Alerts
+en = New CVE alerts
+
+[tools.cve.not_found]
+de = CT „%s“ nicht gefunden.
+en = CT "%s" not found.
+
+[tools.cve.not_running]
+de = CT „%s“ läuft nicht (%s).
+en = CT "%s" is not running (%s).
+
+[tools.cve.unreadable]
+de = Alert-Ordner nicht lesbar:
+en = Alert folder not readable:
+
+[tools.cve.none]
+de = keine neuen Alerts
+en = no new alerts
+
+[tools.cve.count]
+de = %d neu, die letzten:
+en = %d new, latest:
+
+# ─── Incus resources ────────────────────────────────────────────────────────
+[tools.incus_res.title]
+de = Incus-Ressourcen aller CTs
+en = Incus resources of all CTs
+
+[tools.incus_res.desc]
+de = incus list mit Disk und RAM
+en = incus list with disk and RAM
+
+# ─── New project (Incus CT) ─────────────────────────────────────────────────
+[tools.new_ct.title]
+de = Neues Projekt anlegen
+en = Create new project
+
+[tools.new_ct.desc]
+de = Incus-CT ohne Docker
+en = Incus CT without Docker
+
+[tools.new_ct.no_images]
+de = Keine lokalen Images gefunden.
+en = No local images found.
+
+[tools.new_ct.images]
+de = Lokale Images
+en = Local images
+
+[tools.new_ct.menu]
+de = Neues Projekt
+en = New project
+
+[tools.new_ct.menu_sub]
+de = Incus-CT, nur default-Profil
+en = Incus CT, default profile only
+
+[tools.new_ct.name]
+de = Name
+en = Name
+
+[tools.new_ct.invalid]
+de = Ungültig: Buchstabe am Anfang, dann a-z, 0-9, -, nicht auf - enden.
+en = Invalid: start with a letter, then a-z, 0-9 or -, must not end with -.
+
+[tools.new_ct.taken]
+de = „%s“ existiert schon.
+en = "%s" already exists.
+
+[tools.new_ct.confirm]
+de = %s aus %s anlegen und starten?
+en = Create %s from %s and start it?
+
+[tools.new_ct.shell]
+de = ✓ %s läuft. Direkt in die CT-Shell?
+en = ✓ %s is running. Open the CT shell now?
+
+# ─── Settings entry ─────────────────────────────────────────────────────────
+[tools.setup.title]
+de = Einstellungen
+en = Settings
+
+[tools.setup.desc]
+de = Modus, Start, Anzeige, Zurücksetzen
+en = Mode, startup, display, reset
+
+# ─── Server check (lib/tools_check.sh) ──────────────────────────────────────
+[check.title]
+de = Server-Check
+en = Server check
+
+[check.desc]
+de = Ampel: Dienste, Platz, Updates, Ports, SSH
+en = Traffic light: services, space, updates, ports, SSH
+
+[check.failed_units]
+de = Fehlgeschlagene Units (%d): %s
+en = Failed units (%d): %s
+
+[check.no_failed_units]
+de = keine fehlgeschlagenen Units
+en = no failed units
+
+[check.fs_full]
+de = Dateisystem %s zu %d %% voll
+en = Filesystem %s is %d %% full
+
+[check.ram]
+de = RAM zu %d %% belegt
+en = RAM %d %% used
+
+[check.swap]
+de = Swap zu %d %% belegt
+en = Swap %d %% used
+
+[check.pool_full]
+de = Storage-Pool %s zu %d %% voll (%s / %s)
+en = Storage pool %s is %d %% full (%s / %s)
+
+[check.snapshots]
+de = %d Incus-Snapshots vorhanden (%s)
+en = %d Incus snapshots present (%s)
+
+[check.ctr_issues]
+de = Container-Probleme (%d): %s
+en = Container problems (%d): %s
+
+[check.no_ctr_issues]
+de = keine Container-Probleme
+en = no container problems
+
+[check.hygiene]
+de = %d Container ohne Restart-Policy oder gestoppt
+en = %d containers without restart policy or stopped
+
+[check.updates_sec]
+de = %s Updates offen, davon %s Security
+en = %s updates pending, %s of them security
+
+[check.updates]
+de = %s Updates offen
+en = %s updates pending
+
+[check.no_updates]
+de = keine Updates offen
+en = no pending updates
+
+[check.lists_old]
+de = Paketlisten älter als 7 Tage
+en = Package lists older than 7 days
+
+[check.reboot]
+de = Neustart nötig
+en = Reboot required
+
+[check.reboot_kernel]
+de = Neustart nötig (Kernel %s)
+en = Reboot required (kernel %s)
+
+[check.public]
+de = öffentlich: %s
+en = public: %s
+
+[check.sshd_password]
+de = sshd erlaubt Passwort-Login
+en = sshd allows password login
+
+[check.sshd_root]
+de = sshd erlaubt Root-Login mit Passwort
+en = sshd allows root login with password
+
+[check.ssh_fails]
+de = %d SSH-Fehlversuche von %d Adressen in 24 h
+en = %d failed SSH logins from %d addresses in 24 h
+
+[check.journal_errs]
+de = %d Fehlermeldungen im Journal (24 h)
+en = %d error messages in the journal (24 h)
+
+[check.checking]
+de = Prüfe den Server
+en = Checking the server
+
+[check.nothing]
+de = (keine Prüfung möglich)
+en = (no checks possible)
+
+[check.result]
+de = Ergebnis
+en = Result
+
+[check.result_counts]
+de = %d Fehler · %d Warnungen
+en = %d errors · %d warnings
+
+[check.key_recheck]
+de = neu prüfen
+en = check again
+
+[check.sub]
+de = Auswahl öffnet das Werkzeug
+en = Select to open the tool
+
+# ─── Container resources (lib/tools_resources.sh) ───────────────────────────
+[res.title]
+de = Container-Ressourcen
+en = Container resources
+
+[res.desc]
+de = RAM/CPU je Container bzw. CT
+en = RAM/CPU per container or CT
+
+[res.host_ram]
+de = Host-RAM
+en = Host RAM
+
+[res.swap]
+de = Swap
+en = Swap
+
+[res.measuring]
+de = Messe docker stats…
+en = Measuring docker stats…
+
+[res.measuring_in]
+de = Messe docker stats in %s…
+en = Measuring docker stats in %s…
+
+[res.sorting]
+de = Sortierung
+en = Sort order
+
+[res.no_containers]
+de = (keine laufenden Container oder Docker nicht erreichbar)
+en = (no running containers or Docker unreachable)
+
+[res.key_sort]
+de = nach %s sortieren
+en = sort by %s
+
+[res.key_remeasure]
+de = neu messen
+en = measure again
+
+[res.host_docker]
+de = Host-Docker
+en = Host Docker
+
+[res.running_head]
+de = Laufende CTs nach RAM
+en = Running CTs by RAM
+
+[res.procs]
+de = Prozesse
+en = Procs
+
+[res.stopped_head]
+de = Gestoppt
+en = Stopped
+
+[res.key_reload]
+de = neu laden
+en = reload
+
+[res.sub_incus]
+de = Incus-CTs · incus list
+en = Incus CTs · incus list
+
+# ─── Container hygiene (lib/tools_hygiene.sh) ───────────────────────────────
+[hyg.title]
+de = Container-Hygiene
+en = Container hygiene
+
+[hyg.desc]
+de = ohne Projekt/Policy, exited, Zufallsnamen
+en = no project/policy, exited, random names
+
+[hyg.norestart]
+de = läuft ohne Compose-Projekt und ohne Restart-Policy
+en = runs without Compose project and without restart policy
+
+[hyg.project]
+de = (Projekt %s)
+en = (project %s)
+
+[hyg.policy]
+de = , Policy %s
+en = , policy %s
+
+[hyg.random]
+de = Zufallsname, vermutlich docker run ohne --name
+en = random name, probably docker run without --name
+
+[hyg.noname]
+de = Image %s hat keinen Namen mehr (Tag neu vergeben)
+en = image %s has no name anymore (tag was reassigned)
+
+[hyg.latest]
+de = %s (kein fester Tag)
+en = %s (no fixed tag)
+
+[hyg.head_norestart]
+de = Ohne Projekt und ohne Restart-Policy
+en = No project and no restart policy
+
+[hyg.head_exited]
+de = Gestoppte Container
+en = Stopped containers
+
+[hyg.head_random]
+de = Zufallsnamen
+en = Random names
+
+[hyg.head_noname]
+de = Images ohne Namen
+en = Images without a name
+
+[hyg.head_latest]
+de = Images ohne festen Tag
+en = Images without a fixed tag
+
+[hyg.restart_note]
+de = Ohne Restart-Policy startet ein Container nach Reboot oder Docker-Neustart nicht wieder.
+en = Without a restart policy a container does not come back after a reboot or Docker restart.
+
+[hyg.hint_restart]
+de = (oder in ein Compose-Projekt überführen)
+en = (or move it into a Compose project)
+
+[hyg.hint_rm]
+de = (vorher prüfen, ob noch gebraucht)
+en = (check first whether it is still needed)

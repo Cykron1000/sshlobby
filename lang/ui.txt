@@ -1,0 +1,366 @@
+# sshlobby language file: menu engine and dialogs (ui.*), core (core.*), command line (cli.*),
+# Incus backend (incus.*). Format and rules: see the head of lang/strings.txt.
+
+# ─── core ───
+
+[core.time.just_now]
+de = gerade eben
+en = just now
+
+[core.time.min_ago]
+de = vor %d min
+en = %d min ago
+
+[core.time.hours_ago]
+de = vor %d h
+en = %d h ago
+
+[core.time.days_ago]
+de = vor %d T
+en = %d d ago
+
+[core.unit.days]
+de = T
+en = d
+
+[core.config.header]
+de = sshlobby Konfiguration: KEY=wert, wird nicht als Shell-Code ausgeführt.
+en = sshlobby config: KEY=value, never run as shell code.
+
+# ─── command line ───
+
+[cli.usage.synopsis]
+de = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <ziel> | --setup | --settings | --reset | -h | --version]
+en = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <target> | --setup | --settings | --reset | -h | --version]
+
+[cli.usage.noarg]
+de = (ohne Argument)
+en = (no arguments)
+
+[cli.usage.menu]
+de = interaktives Menü (am Terminal Pfeiltasten, sonst nummerierte Zeilen)
+en = interactive menu (arrow keys in a terminal, numbered lines otherwise)
+
+[cli.usage.list]
+de = Übersicht ohne Menü (incus/layered: CTs, docker: Compose-Projekte)
+en = overview without menu (incus/layered: CTs, docker: Compose projects)
+
+[cli.usage.target]
+de = ziel
+en = target
+
+[cli.usage.go]
+de = direkt in eine Shell
+en = open a shell directly
+
+[cli.usage.go_layered]
+de = <ct> oder <ct>/<container>
+en = <ct> or <ct>/<container>
+
+[cli.usage.go_docker]
+de = <container> oder <projekt>/<container>
+en = <container> or <project>/<container>
+
+[cli.usage.setup]
+de = Modus wählen und in ~/.config/sshlobby/config speichern
+en = choose the mode and save it to ~/.config/sshlobby/config
+
+[cli.usage.settings]
+de = Einstellungen öffnen (wie Taste e im Hauptmenü)
+en = open the settings (like key e in the main menu)
+
+[cli.usage.reset]
+de = alles zurücksetzen (vorher Sicherung), danach Einrichtung wie beim ersten Start
+en = reset everything (backup first), then set up as on first start
+
+[cli.usage.mode]
+de = Modus nur für diesen Lauf (auch über SSHLOBBY_MODE=<m>)
+en = mode for this run only (also via SSHLOBBY_MODE=<m>)
+
+[cli.usage.help]
+de = diese Hilfe
+en = show this help
+
+[cli.usage.version]
+de = Version anzeigen
+en = show the version
+
+[cli.usage.exit_codes]
+de = Exit-Codes Menü: 0 Ende, 10 Host-Shell (s, oder q mit Q_ACTION=shell), 20 Logout (q)
+en = Menu exit codes: 0 done, 10 host shell (s, or q with Q_ACTION=shell), 20 logout (q)
+
+[cli.list.project]
+de = PROJEKT
+en = PROJECT
+
+[cli.list.no_docker]
+de = kein
+en = none
+
+[cli.err.no_container]
+de = Container „%s“ gibt es nicht
+en = container "%s" not found
+
+[cli.err.wrong_project]
+de = Container „%s“ gehört zu Projekt „%s“, nicht „%s“
+en = container "%s" belongs to project "%s", not "%s"
+
+[cli.err.incus_go]
+de = im Modus incus nur --go <ct>
+en = mode incus only supports --go <ct>
+
+[cli.err.no_ct]
+de = CT „%s“ gibt es nicht
+en = CT "%s" not found
+
+[cli.err.bad_mode]
+de = unbekannter Modus „%s“ (docker, incus, layered)
+en = unknown mode "%s" (docker, incus, layered)
+
+# ─── incus ───
+
+[incus.not_running]
+de = CT „%s“ läuft nicht (%s)
+en = CT "%s" is not running (%s)
+
+[incus.missing]
+de = gibt es nicht
+en = not found
+
+[incus.action.start]
+de = CT %s: starte
+en = CT %s: starting
+
+[incus.action.stop]
+de = CT %s: stoppe
+en = CT %s: stopping
+
+[incus.action.restart]
+de = CT %s: starte neu
+en = CT %s: restarting
+
+[incus.log_of]
+de = Log von %s
+en = Log of %s
+
+[incus.resources_of]
+de = Ressourcen von %s
+en = Resources of %s
+
+[incus.launch]
+de = Lege %s aus %s an
+en = Creating %s from %s
+
+# ─── ui ───
+
+[ui.crumb.start]
+de = Start
+en = Start
+
+[ui.crumb.main]
+de = Projekt-Dashboard
+en = Project dashboard
+
+[ui.dash.subtitle]
+de = Projekt-Dashboard  v%s · Modus %s
+en = Project dashboard  v%s · mode %s
+
+[ui.dash.disk_full]
+de = DISK VOLL, aufräumen!
+en = DISK FULL, clean up!
+
+[ui.prompt.choice]
+de = Auswahl
+en = Choice
+
+[ui.list.empty]
+de = (leer)
+en = (empty)
+
+[ui.filter.no_match]
+de = keine Treffer für „%s“
+en = no matches for "%s"
+
+[ui.filter.label]
+de = Filter
+en = Filter
+
+[ui.filter.hits]
+de = Treffer
+en = matches
+
+[ui.key.arrows]
+de = Pfeile
+en = arrows
+
+[ui.key.backspace]
+de = Rück
+en = Bksp
+
+[ui.key.page]
+de = Bild↑↓
+en = PgUp/PgDn
+
+[ui.key.home_end]
+de = Pos1/Ende
+en = Home/End
+
+[ui.hint.select]
+de = wählen
+en = select
+
+[ui.hint.open]
+de = öffnen
+en = open
+
+[ui.hint.back]
+de = zurück
+en = back
+
+[ui.hint.filter]
+de = filtern
+en = filter
+
+[ui.hint.filter_off]
+de = Filter aufheben
+en = clear filter
+
+[ui.hint.logout]
+de = Logout
+en = log out
+
+[ui.hint.apply]
+de = übernehmen
+en = apply
+
+[ui.hint.discard]
+de = aufheben
+en = discard
+
+[ui.hint.delete]
+de = löschen
+en = delete
+
+[ui.hint.cancel]
+de = abbrechen
+en = cancel
+
+[ui.hint.clear]
+de = leeren
+en = clear
+
+[ui.hint.scroll]
+de = scrollen
+en = scroll
+
+[ui.hint.close]
+de = schließen
+en = close
+
+[ui.hint.search]
+de = suchen
+en = search
+
+[ui.hint.next]
+de = weiter
+en = next
+
+[ui.hint.sideways]
+de = seitlich
+en = sideways
+
+[ui.hint.page]
+de = Seite
+en = page
+
+[ui.hint.top_bottom]
+de = Anfang/Ende
+en = top/bottom
+
+[ui.loading]
+de = lädt
+en = loading
+
+[ui.loading_title]
+de = lädt %s
+en = loading %s
+
+[ui.msg.error]
+de = Fehler
+en = Error
+
+[ui.msg.warning]
+de = Achtung
+en = Warning
+
+[ui.msg.done]
+de = Erledigt
+en = Done
+
+[ui.msg.info]
+de = Hinweis
+en = Note
+
+[ui.pause]
+de = [Enter] weiter
+en = [Enter] continue
+
+[ui.confirm.title]
+de = Bestätigen
+en = Confirm
+
+[ui.confirm.yes_key]
+de = j
+en = y
+
+[ui.confirm.yes]
+de = Ja
+en = Yes
+
+[ui.confirm.no]
+de = Nein
+en = No
+
+[ui.confirm.choices]
+de = [j/N]
+en = [y/N]
+
+[ui.pager.lines]
+de = %d Zeilen
+en = %d lines
+
+[ui.pager.no_output]
+de = (keine Ausgabe)
+en = (no output)
+
+[ui.pager.pos]
+de = Zeile %d–%d von %d
+en = line %d–%d of %d
+
+[ui.pager.column]
+de = Spalte %d
+en = column %d
+
+[ui.pager.search]
+de = Suche „%s“
+en = search "%s"
+
+[ui.pager.not_found]
+de = „%s“ nicht gefunden
+en = "%s" not found
+
+[ui.pager.search_prompt]
+de = Suchen
+en = Search
+
+[ui.pager.interrupted]
+de = (abgebrochen mit Ctrl-C)
+en = (interrupted with Ctrl-C)
+
+[ui.pager.exit_code]
+de = (Exit-Code %d)
+en = (exit code %d)
+
+[ui.exit_code]
+de = %s: Exit-Code %s
+en = %s: exit code %s

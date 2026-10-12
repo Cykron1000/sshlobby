@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Test-Stub: echtes journalctl darf in Tests nie laufen. Daten aus $PD_FIX/tools/journal:
+#   err.json   Antwort auf "-o json" (Fehler, eine JSON-Zeile pro Meldung)
+#   ssh.txt    Antwort auf Abfragen mit "-t sshd" (sshd-Meldungen, short-iso)
+#   disk.txt   Antwort auf "--disk-usage"
+# Alles andere: Echo "STUB-JOURNALCTL …". Mit "-f" zusätzlich $PD_FIX/.journal-following und,
+# falls STUB_JOURNAL_SLEEP=<s> gesetzt ist, blockieren (Logfolge bis Ctrl-C).
+# Jeder Aufruf wird in $STUB_LOG protokolliert (ein Argument pro Zeile).
+{ echo "== journalctl"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+D=${PD_FIX:-/nonexistent}/tools/journal
+a=" $* "
+if [[ $a == *" -f "* ]]; then
+  echo "STUB-JOURNALCTL $*"
+  touch "${PD_FIX:-/tmp}/.journal-following"
+  [ -n "${STUB_JOURNAL_SLEEP:-}" ] && exec sleep "$STUB_JOURNAL_SLEEP"
+  exit 0
+fi
+if [[ $a == *" --disk-usage "* ]] && [ -f "$D/disk.txt" ]; then cat "$D/disk.txt"; exit 0; fi
+if [[ $a == *" -o json "* ]] && [ -f "$D/err.json" ]; then cat "$D/err.json"; exit 0; fi
+if [[ $a == *" -t sshd "* ]] && [ -f "$D/ssh.txt" ]; then cat "$D/ssh.txt"; exit 0; fi
+echo "STUB-JOURNALCTL $*"

@@ -1,0 +1,23 @@
+2026-10-11T09:47:52+02:00 vps-0001 sshd-session[868821]: Invalid user ens from 198.51.100.7 port 57604
+2026-10-11T09:47:53+02:00 vps-0001 sshd-session[868821]: Disconnected from invalid user ens 198.51.100.7 port 57604 [preauth]
+2026-10-11T09:48:21+02:00 vps-0001 sshd-session[868895]: Invalid user testuser from 198.51.100.23 port 35980
+2026-10-11T09:48:21+02:00 vps-0001 sshd-session[868895]: Disconnected from invalid user testuser 198.51.100.23 port 35980 [preauth]
+2026-10-11T09:49:09+02:00 vps-0001 sshd-session[869010]: Invalid user tiago from 203.0.113.44 port 50242
+2026-10-11T09:49:10+02:00 vps-0001 sshd-session[869010]: Disconnected from invalid user tiago 203.0.113.44 port 50242 [preauth]
+2026-10-11T09:50:05+02:00 vps-0001 sshd-session[869226]: Invalid user jerry from 203.0.113.80 port 56408
+2026-10-11T09:50:05+02:00 vps-0001 sshd-session[869226]: Disconnected from invalid user jerry 203.0.113.80 port 56408 [preauth]
+2026-10-11T09:50:31+02:00 vps-0001 sshd-session[869285]: Invalid user  from 198.51.100.99 port 59076
+2026-10-11T09:50:45+02:00 vps-0001 sshd-session[869332]: Invalid user summer from 198.51.100.7 port 58680
+2026-10-11T09:50:45+02:00 vps-0001 sshd-session[869332]: Disconnected from invalid user summer 198.51.100.7 port 58680 [preauth]
+2026-10-11T09:51:27+02:00 vps-0001 sshd-session[869409]: Invalid user solana from 203.0.113.129 port 49538
+2026-10-11T09:51:27+02:00 vps-0001 sshd-session[869409]: Disconnected from invalid user solana 203.0.113.129 port 49538 [preauth]
+2026-10-11T09:51:39+02:00 vps-0001 sshd-session[869454]: Invalid user  from 198.51.100.67 port 38456
+2026-10-11T09:51:39+02:00 vps-0001 sshd-session[869454]: Connection closed by invalid user  198.51.100.67 port 38456 [preauth]
+2026-10-11T09:52:11+02:00 vps-0001 sshd-session[869529]: Invalid user www from 198.51.100.7 port 59522
+2026-10-11T09:52:11+02:00 vps-0001 sshd-session[869529]: Disconnected from invalid user www 198.51.100.7 port 59522 [preauth]
+2026-10-11T09:52:52+02:00 vps-0001 sshd-session[869630]: Invalid user webmaster from 203.0.113.129 port 50992
+2026-10-11T09:52:53+02:00 vps-0001 sshd-session[869630]: Disconnected from invalid user webmaster 203.0.113.129 port 50992 [preauth]
+2026-10-11T09:52:56+02:00 vps-0001 sshd-session[869649]: Invalid user jane from 203.0.113.80 port 51282
+2026-10-11T10:02:11+02:00 vps-0001 sshd-session[870001]: Failed publickey for root from 198.51.100.7 port 40022 ssh2: RSA SHA256:abc
+2026-10-11T12:30:01+02:00 vps-0001 sshd-session[880001]: Accepted publickey for root from 100.64.0.14 port 53412 ssh2: ED25519 SHA256:xyz
+2026-10-12T08:10:44+02:00 vps-0001 sshd-session[1078700]: Accepted publickey for root from 192.0.2.50 port 60122 ssh2: ED25519 SHA256:xyz

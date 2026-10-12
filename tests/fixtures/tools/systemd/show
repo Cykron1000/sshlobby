@@ -1,0 +1,16 @@
+hermes-gateway.service|MainPID=1080691
+hermes-gateway.service|NRestarts=0
+hermes-gateway.service|MemoryCurrent=716959744
+hermes-gateway.service|FragmentPath=/etc/systemd/system/hermes-gateway.service
+hermes-gateway.service|ActiveEnterTimestamp=Mon 2026-10-12 08:11:44 CEST
+hermes-webui.service|FragmentPath=/etc/systemd/system/hermes-webui.service
+hermes-webui.service|NRestarts=4
+cloudflared.service|FragmentPath=/etc/systemd/system/cloudflared.service
+cloudflared-update.service|FragmentPath=/etc/systemd/system/cloudflared-update.service
+mutagen.service|FragmentPath=/etc/systemd/system/mutagen.service
+backup-nightly.service|FragmentPath=/etc/systemd/system/backup-nightly.service
+backup-nightly.service|Result=exit-code
+backup-nightly.service|InactiveEnterTimestamp=Mon 2026-10-12 03:00:12 CEST
+docker-oom-shields.service|FragmentPath=/etc/systemd/system/docker-oom-shields.service
+ssh.service|MainPID=882
+ssh.service|MemoryCurrent=5242880

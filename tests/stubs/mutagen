@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Test-Stub: echtes mutagen darf in Tests nie laufen
+{ echo "== mutagen"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "STUB-MUTAGEN $*"

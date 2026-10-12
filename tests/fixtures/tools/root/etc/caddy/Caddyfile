@@ -1,0 +1,28 @@
+{
+	email admin@example.org
+}
+
+(common) {
+	encode gzip
+}
+
+cloud.example.org {
+	import common
+	reverse_proxy 127.0.0.1:3080
+}
+
+git.example.org, www.git.example.org {
+	reverse_proxy 127.0.0.1:8096 {
+		header_up X-Real-IP {remote_host}
+	}
+}
+
+# alte Seite
+# old.example.org {
+#	respond "weg"
+# }
+
+files.example.org {
+	root * /srv/files
+	file_server
+}

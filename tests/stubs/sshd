@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test-Stub für sshd: nur "sshd -T" (aus $PD_FIX/tools/sshd-T.txt)
+{ echo "== sshd"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+[ "${1:-}" = -T ] || { echo "sshd-stub: nur -T" >&2; exit 1; }
+cat "${PD_FIX:?}/tools/sshd-T.txt"

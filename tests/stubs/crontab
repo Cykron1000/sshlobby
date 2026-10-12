@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Test-Stub für crontab: nur "crontab -l" (aus $PD_FIX/tools/crontab.txt, fehlt sie: keine Crontab)
+{ echo "== crontab"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+[ "${1:-}" = -l ] || { echo "crontab-stub: nur -l" >&2; exit 1; }
+f="${PD_FIX:?}/tools/crontab.txt"
+[ -f "$f" ] || { echo "no crontab for root" >&2; exit 1; }
+cat "$f"

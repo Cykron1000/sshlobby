@@ -1,0 +1,577 @@
+# sshlobby language file: settings (lib/settings.sh) and the systemd services tool (lib/tools_systemd.sh).
+# Format and rules: see the head of lang/strings.txt.
+
+# ─── Settings: values ─────────────────────────────────────────────────────
+
+[settings.value.on]
+de = an
+en = on
+
+[settings.value.off]
+de = aus
+en = off
+
+[settings.value.auto]
+de = automatisch
+en = automatic
+
+[settings.value.none]
+de = keiner
+en = none
+
+[settings.value.lines]
+de = %s Zeilen
+en = %s lines
+
+[settings.value.entries]
+de = %s Einträge
+en = %s entries
+
+[settings.value.current]
+de = aktuell %s
+en = current: %s
+
+[settings.hook.missing]
+de = Login-Hook nicht installiert (install.sh)
+en = Login hook not installed (install.sh)
+
+[settings.hook.old]
+de = Hook veraltet: install.sh erneut ausführen
+en = Hook outdated: run install.sh again
+
+# ─── Settings: main screen ────────────────────────────────────────────────
+
+[settings.title]
+de = Einstellungen
+en = Settings
+
+[settings.info.config]
+de = Config
+en = Config
+
+[settings.info.config_new]
+de = %s (noch nicht angelegt)
+en = %s (not created yet)
+
+[settings.info.version]
+de = Version
+en = Version
+
+[settings.group.general]
+de = Allgemein
+en = General
+
+[settings.group.start]
+de = Start und Bedienung
+en = Startup and controls
+
+[settings.group.content]
+de = Inhalte
+en = Content
+
+[settings.group.reset]
+de = Zurücksetzen
+en = Reset
+
+[settings.mode]
+de = Modus
+en = Mode
+
+[settings.mode.from_arg]
+de = %s (per --mode, gespeichert: %s)
+en = %s (via --mode, saved: %s)
+
+[settings.mode.from_env]
+de = %s (per SSHLOBBY_MODE, gespeichert: %s)
+en = %s (via SSHLOBBY_MODE, saved: %s)
+
+[settings.label]
+de = Anzeigename
+en = Display name
+
+[settings.desc]
+de = Beschreibungen
+en = Descriptions
+
+[settings.autostart]
+de = Beim SSH-Login starten
+en = Start on SSH login
+
+[settings.autostart.note]
+de = Wirkt beim nächsten SSH-Login. Von Hand startet sshlobby immer.
+en = Takes effect on the next SSH login. Starting sshlobby by hand always works.
+
+[settings.qaction]
+de = Taste q im Hauptmenü
+en = Key q in the main menu
+
+[settings.qaction.shell]
+de = zur Shell
+en = to the shell
+
+[settings.qaction.logout]
+de = Logout (Verbindung trennen)
+en = Logout (disconnect)
+
+[settings.uimode]
+de = Oberfläche
+en = Interface
+
+[settings.uimode.line]
+de = Zeilenmodus, ab dem nächsten Start
+en = Line mode, from the next start
+
+[settings.uimode.auto]
+de = Pfeiltasten (automatisch)
+en = Arrow keys (automatic)
+
+[settings.uimode.note]
+de = Wirkt ab dem nächsten Start (SSHLOBBY_UI hat Vorrang).
+en = Takes effect on the next start (SSHLOBBY_UI takes precedence).
+
+[settings.color]
+de = Farben
+en = Colors
+
+[settings.symbols]
+de = Symbole
+en = Symbols
+
+[settings.symbols.ascii]
+de = nur ASCII
+en = ASCII only
+
+[settings.recentmax]
+de = Einträge unter Zuletzt
+en = Entries under Recent
+
+[settings.recentmax.hidden]
+de = 0 (ausgeblendet)
+en = 0 (hidden)
+
+[settings.recentmax.hide]
+de = Zuletzt ausblenden
+en = Hide Recent
+
+[settings.hermesct]
+de = Hermes-Suche in Incus-CTs
+en = Hermes search in Incus CTs
+
+[settings.sshhosts]
+de = SSH-Ziele (Anderer Server)
+en = SSH targets (Other server)
+
+[settings.sshhosts.default]
+de = aus ~/.ssh/config
+en = from ~/.ssh/config
+
+[settings.sshhosts.prompt]
+de = SSH-Ziele, durch Leerzeichen getrennt (- = aus ~/.ssh/config)
+en = SSH targets, separated by spaces (- = from ~/.ssh/config)
+
+[settings.sshhosts.invalid]
+de = Ungültiges Ziel: „%s“
+en = Invalid target: "%s"
+
+[settings.cvect]
+de = CVE-Monitor-CT
+en = CVE monitor CT
+
+[settings.cvect.prompt]
+de = Incus-CT des CVE-Monitors (- = Werkzeug aus)
+en = Incus CT of the CVE monitor (- = tool off)
+
+[settings.cvect.invalid]
+de = Ungültiger CT-Name: „%s“
+en = Invalid CT name: "%s"
+
+[settings.rerun]
+de = Einrichtung erneut durchlaufen
+en = Run setup again
+
+[settings.rerun.desc]
+de = Modus, Anzeigename, Beschreibungen
+en = Mode, display name, descriptions
+
+[settings.clearrec]
+de = Verlauf leeren
+en = Clear history
+
+[settings.clearrec.confirm]
+de = Verlauf (%s Einträge) löschen?
+en = Delete history (%s entries)?
+
+[settings.clearrec.done]
+de = Verlauf gelöscht
+en = History deleted
+
+[settings.clearfav]
+de = Favoriten leeren
+en = Clear favorites
+
+[settings.clearfav.confirm]
+de = Favoriten (Container, CTs und Dienste) löschen?
+en = Delete favorites (containers, CTs and services)?
+
+[settings.clearfav.done]
+de = Favoriten gelöscht
+en = Favorites deleted
+
+[settings.resetcfg]
+de = Einstellungen zurücksetzen
+en = Reset settings
+
+[settings.resetcfg.desc]
+de = Config und Beschreibungen, danach Einrichtung
+en = Config and descriptions, then setup
+
+[settings.resetcfg.confirm]
+de = Einstellungen zurücksetzen? Config und Beschreibungen werden gelöscht (vorher gesichert).
+en = Reset settings? Config and descriptions are deleted (backed up first).
+
+[settings.resetall]
+de = Alles zurücksetzen
+en = Reset everything
+
+[settings.resetall.desc]
+de = auch Verlauf und Favoriten
+en = also history and favorites
+
+[settings.resetall.confirm]
+de = Alles zurücksetzen? Config, Beschreibungen, Verlauf und Favoriten werden gelöscht (vorher gesichert).
+en = Reset everything? Config, descriptions, history and favorites are deleted (backed up first).
+
+[settings.showcfg]
+de = Config-Datei anzeigen
+en = Show config file
+
+[settings.showcfg.title]
+de = Config: %s
+en = Config: %s
+
+[settings.showcfg.none]
+de = Noch keine Config: %s
+en = No config yet: %s
+
+# ─── Settings: saving, descriptions ───────────────────────────────────────
+
+[settings.save.failed]
+de = Config nicht schreibbar: %s
+en = Config not writable: %s
+
+[settings.save.done]
+de = Gespeichert: %s=%s
+en = Saved: %s=%s
+
+[settings.desc.file]
+de = Datei
+en = File
+
+[settings.desc.show]
+de = Anzeigen
+en = Show
+
+[settings.desc.edit]
+de = Im Editor bearbeiten
+en = Edit in editor
+
+[settings.desc.example]
+de = Vorlage übernehmen
+en = Use template
+
+[settings.desc.example_desc]
+de = aus examples/, alte Datei → descriptions.bak
+en = from examples/, old file → descriptions.bak
+
+[settings.desc.format]
+de = name|Text
+en = name|text
+
+[settings.desc.none]
+de = Noch keine Beschreibungen.
+en = No descriptions yet.
+
+[settings.desc.template]
+de = # name|Beschreibung, gilt für CTs, Compose-Projekte und Container
+en = # name|description, applies to CTs, Compose projects and containers
+
+# ─── Settings: backups, reset, restore ────────────────────────────────────
+
+[settings.backup.failed_nothing_deleted]
+de = Sicherung fehlgeschlagen, nichts gelöscht.
+en = Backup failed, nothing deleted.
+
+[settings.backup.failed_nothing_changed]
+de = Sicherung fehlgeschlagen, nichts geändert.
+en = Backup failed, nothing changed.
+
+[settings.backup.saved]
+de = Gesichert nach %s
+en = Backed up to %s
+
+[settings.reset.setup_aborted]
+de = Einrichtung abgebrochen: Modus %s erkannt, nichts gespeichert. Sie startet beim nächsten Aufruf erneut.
+en = Setup canceled: detected mode %s, nothing saved. It starts again next time.
+
+[settings.restore]
+de = Sicherung wiederherstellen
+en = Restore backup
+
+[settings.restore.count]
+de = %s vorhanden
+en = %s available
+
+[settings.restore.newest_first]
+de = neueste zuerst
+en = newest first
+
+# date(1) formats for the backup timestamps (not printf: read as is)
+[settings.restore.date_list]
+de = %d.%m.%Y %H:%M:%S
+en = %Y-%m-%d %H:%M:%S
+
+[settings.restore.date_confirm]
+de = %d.%m.%Y %H:%M
+en = %Y-%m-%d %H:%M
+
+[settings.restore.confirm]
+de = Stand vom %s wiederherstellen? Der jetzige Stand wird vorher gesichert.
+en = Restore the state from %s? The current state is backed up first.
+
+[settings.restore.done]
+de = Wiederhergestellt: %s
+en = Restored: %s
+
+# ─── systemd services tool ────────────────────────────────────────────────
+
+[svc.tool.title]
+de = systemd-Dienste
+en = systemd services
+
+[svc.tool.desc]
+de = Status, Logs, Restart/Stop
+en = Status, logs, restart/stop
+
+[svc.list.empty]
+de = systemctl lieferte keine Dienste.
+en = systemctl returned no services.
+
+[svc.list.services]
+de = Dienste
+en = Services
+
+[svc.list.summary]
+de = %s gesamt · %s laufend · %s eigene
+en = %s total · %s running · %s own
+
+[svc.list.failed]
+de = Fehlgeschlagen
+en = Failed
+
+[svc.list.failed_none]
+de = keine
+en = none
+
+[svc.group.favorites]
+de = Favoriten
+en = Favorites
+
+[svc.group.own]
+de = Eigene / Wichtige
+en = Own / Important
+
+[svc.group.running]
+de = Laufend
+en = Running
+
+[svc.group.rest]
+de = Rest (inaktiv, beendet)
+en = Other (inactive, exited)
+
+[svc.key.reload]
+de = neu laden
+en = reload
+
+[svc.screen.subtitle]
+de = systemd-Dienst
+en = systemd service
+
+[svc.info.desc]
+de = Beschreibung
+en = Description
+
+[svc.info.status]
+de = Status
+en = Status
+
+[svc.info.since]
+de = seit %s
+en = since %s
+
+[svc.info.unknown]
+de = unbekannt
+en = unknown
+
+[svc.info.result]
+de = Ergebnis
+en = Result
+
+[svc.info.pid]
+de = Haupt-PID
+en = Main PID
+
+[svc.info.memory]
+de = Speicher
+en = Memory
+
+[svc.info.restarts]
+de = Neustarts
+en = Restarts
+
+[svc.info.autostart]
+de = Autostart
+en = Autostart
+
+[svc.info.unit_file]
+de = Unit-Datei
+en = Unit file
+
+[svc.info.own]
+de = (eigene)
+en = (own)
+
+[svc.info.dropins]
+de = Drop-ins
+en = Drop-ins
+
+[svc.info.warning]
+de = Achtung
+en = Warning
+
+[svc.info.critical]
+de = trägt die SSH-Sitzung bzw. sshlobby
+en = carries the SSH session or sshlobby
+
+[svc.item.logs]
+de = Logs folgen
+en = Follow logs
+
+[svc.item.logs_desc]
+de = journalctl -f -n 100, Ctrl-C zurück
+en = journalctl -f -n 100, Ctrl-C to go back
+
+[svc.item.errors]
+de = Letzte Warnungen und Fehler
+en = Recent warnings and errors
+
+[svc.item.cat]
+de = Unit-Datei anzeigen
+en = Show unit file
+
+[svc.item.restart]
+de = Restart
+en = Restart
+
+[svc.item.stop]
+de = Stop
+en = Stop
+
+[svc.item.start]
+de = Start
+en = Start
+
+[svc.item.confirm]
+de = mit Rückfrage
+en = asks first
+
+[svc.item.disable]
+de = Autostart deaktivieren
+en = Disable autostart
+
+[svc.item.disable_desc]
+de = systemctl disable, mit Rückfrage
+en = systemctl disable, asks first
+
+[svc.item.enable]
+de = Autostart aktivieren
+en = Enable autostart
+
+[svc.item.enable_desc]
+de = systemctl enable, mit Rückfrage
+en = systemctl enable, asks first
+
+[svc.key.fav_remove]
+de = Favorit %s entfernen
+en = Remove favorite %s
+
+[svc.key.fav_add]
+de = Favorit %s hinzufügen
+en = Add favorite %s
+
+[svc.page.errors]
+de = Warnungen und Fehler: %s
+en = Warnings and errors: %s
+
+[svc.page.unit_file]
+de = Unit-Datei: %s
+en = Unit file: %s
+
+[svc.logs.what]
+de = Logs %s
+en = Logs %s
+
+[svc.logs.end]
+de = — Logfolge beendet —
+en = — end of log —
+
+[svc.confirm.restart]
+de = %s neu starten?
+en = Restart %s?
+
+[svc.confirm.stop]
+de = %s stoppen?
+en = Stop %s?
+
+[svc.confirm.enable]
+de = Autostart für %s aktivieren?
+en = Enable autostart for %s?
+
+[svc.confirm.disable]
+de = Autostart für %s deaktivieren?
+en = Disable autostart for %s?
+
+[svc.verb.start]
+de = starte
+en = starting
+
+[svc.verb.restart]
+de = starte neu
+en = restarting
+
+[svc.verb.stop]
+de = stoppe
+en = stopping
+
+[svc.verb.enable]
+de = aktiviere Autostart
+en = enabling autostart
+
+[svc.verb.disable]
+de = deaktiviere Autostart
+en = disabling autostart
+
+[svc.critical.warn]
+de = ACHTUNG: %s trägt die SSH-Sitzung bzw. sshlobby. Die Verbindung kann abbrechen.
+en = WARNING: %s carries the SSH session or sshlobby. The connection may drop.
+
+[svc.critical.confirm]
+de = Trotzdem: %s
+en = Anyway: %s
+
+[svc.critical.type_name]
+de = Zur Bestätigung „%s“ eintippen
+en = Type "%s" to confirm
+
+[svc.critical.aborted]
+de = Abgebrochen, nichts geändert.
+en = Canceled, nothing changed.

@@ -1,0 +1,8 @@
+# Descriptions for a Docker host (mode docker). Format: name|text
+# Use them with sshlobby --setup or copy the file to ~/.config/sshlobby/descriptions
+nextcloud|Nextcloud at cloud.example.org with MongoDB, Meilisearch, admin panel
+gitea|Gitea git server at git.example.org
+authproxy|AuthProxy: login proxy in front of internal services
+jellyfin|Jellyfin media server (Tailnet only)
+hermes|Hermes agent agent-main (gateway, messenger)
+homepage|Homepage start page (Tailnet only :5005)

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test-Stub für tailscale: nur "tailscale status" (aus $PD_FIX/tools/tailscale-status.txt)
+{ echo "== tailscale"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+[ "${1:-}" = status ] || { echo "tailscale-stub: nur status" >&2; exit 1; }
+cat "${PD_FIX:?}/tools/tailscale-status.txt"

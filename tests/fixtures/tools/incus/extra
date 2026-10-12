@@ -1,0 +1,6 @@
+# name|speicher-bytes|swap-bytes|disk-bytes|limits.memory|snapshots (name@zeit, Komma-getrennt)
+alpha|1288490188|314572800|4402341478|2GiB|
+delta|524288000|0|1073741824||
+gamma|209715200|52428800|536870912|1GiB|vor-update@2026-09-30T10:00:00Z,test@2026-10-01T08:00:00Z
+ntfy|52428800|0|268435456||
+security|2147483648|1073741824|8589934592|4GiB|

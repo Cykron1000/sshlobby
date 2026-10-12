@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Test-Stub für wg: nur "wg show all dump" (aus $PD_FIX/tools/wg-dump.txt, enthält einen
+# Platzhalter-Private-Key, den sshlobby nie ausgeben darf)
+{ echo "== wg"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+[ "$*" = "show all dump" ] || { echo "wg-stub: nur show all dump" >&2; exit 1; }
+cat "${PD_FIX:?}/tools/wg-dump.txt"

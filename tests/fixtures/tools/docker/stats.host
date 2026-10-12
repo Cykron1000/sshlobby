@@ -1,0 +1,12 @@
+{"BlockIO":"127kB / 102MB","CPUPerc":"0.00%","Container":"104962b5112f","ID":"104962b5112f","MemPerc":"3.05%","MemUsage":"93.71MiB / 3GiB","Name":"eager_turing","NetIO":"0B / 0B","PIDs":"12"}
+{"BlockIO":"82.3MB / 0B","CPUPerc":"0.00%","Container":"42b5e5db2c50","ID":"42b5e5db2c50","MemPerc":"7.60%","MemUsage":"233.5MiB / 3GiB","Name":"quirky_hopper","NetIO":"0B / 0B","PIDs":"12"}
+{"BlockIO":"795MB / 524MB","CPUPerc":"0.00%","Container":"43048a59888f","ID":"43048a59888f","MemPerc":"10.23%","MemUsage":"78.55MiB / 768MiB","Name":"gitea","NetIO":"1MB / 1.03MB","PIDs":"13"}
+{"BlockIO":"2.16GB / 856MB","CPUPerc":"0.15%","Container":"65ed3ddebe62","ID":"65ed3ddebe62","MemPerc":"3.95%","MemUsage":"313.5MiB / 7.759GiB","Name":"Nextcloud","NetIO":"100MB / 175MB","PIDs":"29"}
+{"BlockIO":"1.09GB / 19.3MB","CPUPerc":"0.00%","Container":"4f2344cb5665","ID":"4f2344cb5665","MemPerc":"0.34%","MemUsage":"27.17MiB / 7.759GiB","Name":"authproxy","NetIO":"11.5MB / 5.38MB","PIDs":"10"}
+{"BlockIO":"1.49GB / 222MB","CPUPerc":"0.00%","Container":"f2433d5f904e","ID":"f2433d5f904e","MemPerc":"4.01%","MemUsage":"15.39MiB / 384MiB","Name":"firecrawl-mcp","NetIO":"809kB / 3.8MB","PIDs":"11"}
+{"BlockIO":"5.12GB / 251MB","CPUPerc":"0.62%","Container":"8535f1a083c1","ID":"8535f1a083c1","MemPerc":"0.47%","MemUsage":"37.46MiB / 7.759GiB","Name":"nextcloud-admin-panel","NetIO":"508kB / 1.66MB","PIDs":"11"}
+{"BlockIO":"4.4GB / 676MB","CPUPerc":"0.00%","Container":"383bf0ea8fad","ID":"383bf0ea8fad","MemPerc":"0.67%","MemUsage":"53.27MiB / 7.759GiB","Name":"homepage","NetIO":"14.1MB / 45.3MB","PIDs":"11"}
+{"BlockIO":"7.14GB / 17.6MB","CPUPerc":"0.08%","Container":"ef588e30b978","ID":"ef588e30b978","MemPerc":"0.22%","MemUsage":"17.56MiB / 7.759GiB","Name":"chat-meilisearch","NetIO":"98.7kB / 57.2kB","PIDs":"14"}
+{"BlockIO":"183GB / 46.9GB","CPUPerc":"0.69%","Container":"67123e5deb5c","ID":"67123e5deb5c","MemPerc":"1.57%","MemUsage":"124.8MiB / 7.759GiB","Name":"chat-mongodb","NetIO":"1.19GB / 736MB","PIDs":"66"}
+{"BlockIO":"1.67GB / 1.21GB","CPUPerc":"0.09%","Container":"1da7faafb0fb","ID":"1da7faafb0fb","MemPerc":"3.35%","MemUsage":"68.58MiB / 2GiB","Name":"jellyfin_container","NetIO":"930kB / 136kB","PIDs":"46"}
+{"BlockIO":"277GB / 17.8GB","CPUPerc":"0.12%","Container":"e714654ec86f","ID":"e714654ec86f","MemPerc":"1.58%","MemUsage":"125.7MiB / 7.759GiB","Name":"hermes","NetIO":"9.19MB / 46.2kB","PIDs":"25"}

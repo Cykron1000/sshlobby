@@ -1,0 +1,485 @@
+# sshlobby language file: tools Hermes instances (hermes.*), updates (upd.*), timers & cron (timers.*).
+# Format and rules: see the header of lang/strings.txt.
+
+# ─── Hermes instances (lib/tools_hermes.sh) ────────────────────────────────
+[hermes.title]
+de = Hermes-Instanzen
+en = Hermes instances
+
+[hermes.desc]
+de = System, Docker, Incus: Status, Logs, Gateway, Update
+en = System, Docker, Incus: status, logs, gateway, update
+
+[hermes.where.system]
+de = System
+en = System
+
+[hermes.no_services]
+de = keine Dienste
+en = no services
+
+[hermes.list.searching]
+de = suche Hermes-Instanzen
+en = searching for Hermes instances
+
+[hermes.list.none]
+de = (keine Hermes-Instanz gefunden: %s)
+en = (no Hermes instance found: %s)
+
+[hermes.list.rescan]
+de = neu suchen
+en = rescan
+
+[hermes.list.found]
+de = %d gefunden
+en = %d found
+
+[hermes.list.cts_scanned]
+de = CTs durchsucht: %s
+en = CTs scanned: %s
+
+[hermes.info.where]
+de = Ort
+en = Location
+
+[hermes.info.incus_ct]
+de = (Incus-CT %s)
+en = (Incus CT %s)
+
+[hermes.info.data]
+de = Daten
+en = Data
+
+[hermes.info.unknown]
+de = unbekannt
+en = unknown
+
+[hermes.info.in_container]
+de = (im Container %s)
+en = (in the container %s)
+
+[hermes.item.status]
+de = Status
+en = Status
+
+[hermes.item.doctor]
+de = Diagnose
+en = Diagnostics
+
+[hermes.item.cron]
+de = Cron-Jobs
+en = Cron jobs
+
+[hermes.item.profiles]
+de = Profile
+en = Profiles
+
+[hermes.item.cli]
+de = Hermes-CLI öffnen
+en = Open Hermes CLI
+
+[hermes.item.cli_desc]
+de = interaktiv, beenden mit /exit
+en = interactive, quit with /exit
+
+[hermes.head.files]
+de = Logs und Dateien
+en = Logs and files
+
+[hermes.item.glogs]
+de = Gateway-Logs folgen
+en = Follow gateway logs
+
+[hermes.item.glogs_desc]
+de = Ctrl-C zurück
+en = Ctrl-C to go back
+
+[hermes.item.errors]
+de = Fehler-Log
+en = Error log
+
+[hermes.item.agentlog]
+de = Agent-Log
+en = Agent log
+
+[hermes.item.log_desc]
+de = %s, letzte 150 Zeilen
+en = %s, last 150 lines
+
+[hermes.item.config]
+de = config.yaml anzeigen
+en = Show config.yaml
+
+[hermes.item.config_desc]
+de = Schlüssel und Tokens maskiert
+en = keys and tokens masked
+
+[hermes.item.disk]
+de = Speicherplatz
+en = Disk usage
+
+[hermes.item.disk_desc]
+de = größte Ordner im Datenordner
+en = largest folders in the data folder
+
+[hermes.item.shell]
+de = Shell
+en = Shell
+
+[hermes.item.shell_container]
+de = im Container
+en = in the container
+
+[hermes.item.shell_data]
+de = im Datenordner
+en = in the data folder
+
+[hermes.head.control]
+de = Steuern
+en = Control
+
+[hermes.item.confirm_desc]
+de = mit Rückfrage
+en = asks first
+
+[hermes.item.grestart]
+de = Gateway neu starten
+en = Restart gateway
+
+[hermes.item.gstop]
+de = Gateway stoppen
+en = Stop gateway
+
+[hermes.item.gstart]
+de = Gateway starten
+en = Start gateway
+
+[hermes.item.wrestart]
+de = WebUI neu starten
+en = Restart WebUI
+
+[hermes.item.wstart]
+de = WebUI starten
+en = Start WebUI
+
+[hermes.item.update]
+de = Hermes aktualisieren
+en = Update Hermes
+
+[hermes.item.update_desc]
+de = hermes update, mit Rückfrage
+en = hermes update, asks first
+
+[hermes.item.pull]
+de = Neues Image ziehen
+en = Pull new image
+
+[hermes.item.pull_desc]
+de = docker pull, Container bleibt
+en = docker pull, container stays as is
+
+[hermes.cli.not_found]
+de = hermes-CLI nicht gefunden
+en = hermes CLI not found
+
+[hermes.file.missing]
+de = (%s fehlt)
+en = (%s missing)
+
+[hermes.config.masked]
+de = *** (maskiert)
+en = *** (masked)
+
+[hermes.logs.ended]
+de = — Logfolge beendet —
+en = — stopped following logs —
+
+[hermes.page.cron]
+de = Cron-Jobs: %s
+en = Cron jobs: %s
+
+[hermes.page.profiles]
+de = Profile: %s
+en = Profiles: %s
+
+[hermes.page.cli]
+de = Hermes-CLI %s
+en = Hermes CLI %s
+
+[hermes.page.disk]
+de = Speicherplatz: %s
+en = Disk usage: %s
+
+[hermes.page.logs]
+de = Logs %s
+en = Logs %s
+
+[hermes.confirm.grestart]
+de = Gateway von %s neu starten? Laufende Chats dieser Instanz brechen kurz ab.
+en = Restart the gateway of %s? Running chats of this instance drop briefly.
+
+[hermes.confirm.gstop]
+de = Gateway von %s stoppen? Die Instanz ist danach nicht mehr erreichbar.
+en = Stop the gateway of %s? The instance is unreachable afterwards.
+
+[hermes.confirm.wrestart]
+de = WebUI von %s neu starten?
+en = Restart the WebUI of %s?
+
+[hermes.confirm.update]
+de = Hermes für %s aktualisieren (hermes update)? Das betrifft die ganze Installation auf dieser Ebene.
+en = Update Hermes for %s (hermes update)? This affects the whole installation on this layer.
+
+[hermes.confirm.pull]
+de = Image %s neu ziehen? Der Container läuft weiter mit dem alten Image.
+en = Pull image %s again? The container keeps running on the old image.
+
+[hermes.pull.done]
+de = Image aktualisiert. Wirksam erst, wenn der Container mit denselben Optionen neu erstellt wird (compose up -d bzw. docker run).
+en = Image updated. Takes effect once the container is recreated with the same options (compose up -d or docker run).
+
+[hermes.update.ended]
+de = — hermes update beendet (Exit-Code %s) —
+en = — hermes update finished (exit code %s) —
+
+[hermes.refreshing]
+de = aktualisiere
+en = refreshing
+
+[hermes.lost]
+de = Instanz nach der Aktion nicht mehr gefunden.
+en = Instance no longer found after the action.
+
+# ─── Updates (lib/tools_updates.sh) ────────────────────────────────────────
+[upd.title]
+de = Updates
+en = Updates
+
+[upd.desc]
+de = anzeigen und installieren, Neustart
+en = view and install, reboot
+
+[upd.head.packages]
+de = Paket-Updates (apt list --upgradable)
+en = Package updates (apt list --upgradable)
+
+[upd.unknown]
+de = unbekannt
+en = unknown
+
+[upd.lists]
+de = Paketlisten
+en = Package lists
+
+[upd.lists.updated]
+de = aktualisiert %s
+en = updated %s
+
+[upd.lists.stale]
+de = Liste veraltet, Zahlen können zu niedrig sein. Im Menü: Paketlisten aktualisieren.
+en = List is outdated, counts may be too low. In the menu: Refresh package lists.
+
+[upd.pending]
+de = Updates offen
+en = Pending updates
+
+[upd.pending_sec]
+de = davon Security
+en = of which security
+
+[upd.head.security]
+de = Security-Updates
+en = Security updates
+
+[upd.head.reboot]
+de = Neustart
+en = Reboot
+
+[upd.reboot.required]
+de = Neustart nötig (/var/run/reboot-required)
+en = Reboot required (/var/run/reboot-required)
+
+[upd.reboot.none]
+de = kein Neustart angefordert
+en = no reboot requested
+
+[upd.kernel.running]
+de = Kernel läuft
+en = Running kernel
+
+[upd.kernel.installed]
+de = Kernel installiert
+en = Installed kernel
+
+[upd.kernel.newer]
+de = %s (neuer, erst nach Neustart aktiv)
+en = %s (newer, active after a reboot)
+
+[upd.run.security]
+de = Security-Updates:
+en = Security updates:
+
+[upd.run.no_security]
+de = Keine Security-Updates offen.
+en = No pending security updates.
+
+[upd.run.done]
+de = Fertig.
+en = Done.
+
+[upd.run.failed]
+de = apt-get meldet Exit-Code %s.
+en = apt-get reported exit code %s.
+
+[upd.run.reboot]
+de = Neustart nötig: %s
+en = Reboot required: %s
+
+[upd.run.close]
+de = [Enter] schließt das Fenster
+en = [Enter] closes the window
+
+[upd.docker_note]
+de = Docker ist im Update: der Docker-Daemon startet neu, Container sind kurz weg.
+en = Docker is part of the update: the Docker daemon restarts, containers are briefly down.
+
+[upd.info.pending]
+de = Offen
+en = Pending
+
+[upd.info.pending_val]
+de = %s Updates, davon %s Security
+en = %s updates, %s of them security
+
+[upd.info.reboot]
+de = nötig (Kernel %s → %s)
+en = required (kernel %s → %s)
+
+[upd.item.attach_running]
+de = Laufendes Update öffnen
+en = Open running update
+
+[upd.item.attach_running_desc]
+de = tmux-Sitzung %s läuft noch
+en = tmux session %s still running
+
+[upd.item.attach_done]
+de = Ergebnis des letzten Updates
+en = Result of the last update
+
+[upd.item.attach_done_desc]
+de = fertig, Exit-Code %s, Enter schließt
+en = done, exit code %s, Enter closes
+
+[upd.item.show]
+de = Übersicht
+en = Overview
+
+[upd.item.show_desc]
+de = Security-Pakete, Kernel, Neustart
+en = security packages, kernel, reboot
+
+[upd.item.list]
+de = Alle Pakete auflisten
+en = List all packages
+
+[upd.item.refresh]
+de = Paketlisten aktualisieren
+en = Refresh package lists
+
+[upd.item.sec]
+de = Security-Updates installieren
+en = Install security updates
+
+[upd.item.sec_desc]
+de = %s Pakete, mit Rückfrage
+en = %s packages, asks first
+
+[upd.item.all]
+de = Alle Updates installieren
+en = Install all updates
+
+[upd.item.all_desc]
+de = apt-get upgrade, mit Rückfrage
+en = apt-get upgrade, asks first
+
+[upd.item.reboot]
+de = Server neu starten
+en = Reboot server
+
+[upd.item.reboot_desc]
+de = mit Rückfrage und Hostname
+en = asks first, needs the hostname
+
+[upd.busy]
+de = Es läuft schon ein Update (tmux-Sitzung %s).
+en = An update is already running (tmux session %s).
+
+[upd.confirm.sec]
+de = %s Security-Updates installieren (vorher apt-get update)?
+en = Install %s security updates (apt-get update first)?
+
+[upd.confirm.all]
+de = Alle %s Updates installieren (vorher apt-get update)?
+en = Install all %s updates (apt-get update first)?
+
+[upd.reboot.warn]
+de = ACHTUNG: Der Server startet neu. Alle Verbindungen und Dienste sind kurz weg.
+en = WARNING: The server reboots. All connections and services are briefly down.
+
+[upd.reboot.confirm]
+de = Server %s jetzt neu starten?
+en = Reboot server %s now?
+
+[upd.reboot.type_host]
+de = Zur Bestätigung den Hostnamen „%s“ eintippen
+en = Type the hostname "%s" to confirm
+
+[upd.reboot.cancelled]
+de = Abgebrochen, nichts geändert.
+en = Cancelled, nothing changed.
+
+# ─── Timers & cron (lib/tools_timers.sh) ───────────────────────────────────
+[timers.title]
+de = Timer & Cron
+en = Timers & cron
+
+[timers.desc]
+de = systemd-Timer, crontab, cron.d
+en = systemd timers, crontab, cron.d
+
+[timers.left.overdue]
+de = überfällig
+en = overdue
+
+[timers.left.min]
+de = in %d min
+en = in %d min
+
+[timers.left.hours]
+de = in %d h
+en = in %d h
+
+[timers.left.days]
+de = in %d T
+en = in %d d
+
+[timers.head.systemd]
+de = systemd-Timer (nächster Lauf zuerst)
+en = systemd timers (next run first)
+
+[timers.last]
+de = zuletzt %s
+en = last %s
+
+[timers.failed]
+de = (%s fehlgeschlagen)
+en = (%s failed)
+
+[timers.no_crontab]
+de = keine Crontab
+en = no crontab
+
+[timers.head.run_parts]
+de = run-parts-Ordner
+en = run-parts folders

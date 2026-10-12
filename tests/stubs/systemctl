@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# Test-Stub: echtes systemctl darf in Tests nie laufen (produktive Dienste auf dem Host).
+# Daten aus $PD_FIX/tools/systemd (ohne diese Dateien nur das Echo "STUB-SYSTEMCTL …"):
+#   list-units.json  Antwort auf "list-units -o json", gefiltert nach --type, --state/--failed, Mustern
+#   unit-files.txt   Antwort auf "list-unit-files" (Text, Muster werden gefiltert)
+#   timers.json      Antwort auf "list-timers -o json"
+#   show             Zusatzwerte für "show": Zeilen "unit|Key=Wert" (auch Keys außerhalb der Standardliste,
+#                    z. B. ExecStart, Environment, User). Sonst aus list-units.json,
+#                    unit-files.txt und Defaults (FragmentPath=/usr/lib/systemd/system/<unit>)
+# Im CT (PD_CT gesetzt, über den incus-Stub) gilt $PD_FIX/tools/systemd.<ct>, fehlt der Ordner, gibt es keine Units.
+# Steuerung: STUB_SVC_RC=<n> Exit-Code von start/stop/restart/reload/enable/disable.
+# Jeder Aufruf wird in $STUB_LOG protokolliert (ein Argument pro Zeile).
+set -u
+{ echo "== systemctl"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+D=${PD_FIX:-/nonexistent}/tools/systemd${PD_CT:+.$PD_CT} # im CT (incus exec sh -c): eigene Daten, sonst leer
+
+args=() json=0 state="" type=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -o|--output) [ "${2:-}" = json ] && json=1; shift;;
+    -o*|--output=*) [[ $1 == *json ]] && json=1;;
+    --failed) state=failed;;
+    --state=*) state=${1#*=};;
+    --type=*) type=${1#*=};;
+    -t) type=${2:-}; shift;;
+    -p|--property|-n|--lines) shift;;
+    -*) ;;
+    *) args+=("$1");;
+  esac
+  shift
+done
+sub=${args[0]:-}
+pats=("${args[@]:1}")
+
+units_json() { # gefilterte list-units.json
+  local re="" p
+  for p in "${pats[@]}"; do p=${p//./\\.}; p=${p//\*/.*}; re+="${re:+|}^($p)\$"; done
+  jq -c --arg t "$type" --arg s "$state" --arg re "$re" '[.[]
+    | select($t == "" or (.unit | endswith("." + $t)))
+    | select($s == "" or .active == $s or .sub == $s)
+    | select($re == "" or (.unit | test($re)))]' "$D/list-units.json"
+}
+field() { jq -r --arg u "$1" --arg f "$2" '.[] | select(.unit == $u) | .[$f]' "$D/list-units.json"; }
+
+case "$sub" in
+  list-units)
+    [ -f "$D/list-units.json" ] || { echo "STUB-SYSTEMCTL list-units"; exit 0; }
+    if [ "$json" = 1 ]; then units_json
+    else units_json | jq -r '.[] | "\(.unit) \(.load) \(.active) \(.sub) \(.description)"'; fi;;
+  list-unit-files)
+    [ -f "$D/unit-files.txt" ] || { echo "STUB-SYSTEMCTL list-unit-files"; exit 0; }
+    awk -v t="$type" 't == "" || $1 ~ ("\\." t "$")' "$D/unit-files.txt";;
+  list-timers)
+    if [ -f "$D/timers.json" ]; then cat "$D/timers.json"; else echo "STUB-SYSTEMCTL list-timers"; fi;;
+  show)
+    [ -f "$D/list-units.json" ] || { echo "STUB-SYSTEMCTL show"; exit 0; }
+    awk -F'\t' -v uf="$D/unit-files.txt" -v sh="$D/show" '
+      FNR == NR { want[++n] = $0; next }
+      { load[$1]=$2; act[$1]=$3; sub_[$1]=$4; desc[$1]=$5 }
+      END {
+        while ((getline l < uf) > 0) { split(l, a, " "); ufs[a[1]] = a[2] }
+        while ((getline l < sh) > 0) { i = index(l, "|"); u = substr(l, 1, i-1); kv = substr(l, i+1)
+          k = substr(kv, 1, index(kv, "=") - 1); extra[u, k] = kv; ek[u] = ek[u] " " k }
+        split("Id Description LoadState ActiveState SubState MainPID NRestarts MemoryCurrent UnitFileState FragmentPath Result ActiveEnterTimestamp InactiveEnterTimestamp", keys, " ")
+        for (j = 1; j <= n; j++) {
+          u = want[j]; if (j > 1) print ""
+          d["Id"] = u; d["Description"] = (u in desc) ? desc[u] : u
+          d["LoadState"] = (u in load) ? load[u] : "loaded"; d["ActiveState"] = (u in act) ? act[u] : "inactive"
+          d["SubState"] = (u in sub_) ? sub_[u] : "dead"; d["MainPID"] = 0; d["NRestarts"] = 0
+          d["MemoryCurrent"] = "[not set]"; d["UnitFileState"] = ufs[u]
+          d["FragmentPath"] = "/usr/lib/systemd/system/" u; d["Result"] = "success"
+          d["ActiveEnterTimestamp"] = "Sun 2026-10-11 09:00:00 CEST"; d["InactiveEnterTimestamp"] = ""
+          for (i = 1; i in keys; i++) { k = keys[i]; print ((u, k) in extra) ? extra[u, k] : k "=" d[k]; std[k] = 1 }
+          m = split(ek[u], xk, " "); for (i = 1; i <= m; i++) if (!(xk[i] in std)) print extra[u, xk[i]]
+        }
+      }' <(printf '%s\n' "${pats[@]}") \
+         <(jq -r '.[] | [.unit, .load, .active, .sub, .description] | @tsv' "$D/list-units.json")
+    ;;
+  is-active)
+    a=$(field "${pats[0]:-}" active 2>/dev/null); echo "${a:-inactive}"; [ "$a" = active ];;
+  is-enabled)
+    s=$(awk -v u="${pats[0]:-}" '$1 == u {print $2}' "$D/unit-files.txt" 2>/dev/null)
+    if [ -z "$s" ]; then echo "Failed to get unit file state for ${pats[0]:-}: No such file or directory" >&2; exit 1; fi
+    echo "$s"; [ "$s" = enabled ];;
+  start|stop|restart|reload|enable|disable)
+    echo "STUB-SYSTEMCTL $sub ${pats[*]}"; exit "${STUB_SVC_RC:-0}";;
+  *)
+    echo "STUB-SYSTEMCTL ${args[*]}";;
+esac

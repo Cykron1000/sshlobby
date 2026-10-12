@@ -1,0 +1,14 @@
+eager_turing|busybox:1.36|running|Up About an hour|||||no
+quirky_hopper|busybox:1.36|running|Up 2 hours|||||no
+gitea|gitea/gitea:4.3.3|running|Up 45 hours (healthy)|127.0.0.1:8096->3000/tcp|@FS@/opt/gitea|gitea|app|unless-stopped
+Nextcloud|registry.example.org/nextcloud/nextcloud:v0.8.8|running|Up 4 days (healthy)|127.0.0.1:3080->3080/tcp|@FS@/opt/nextcloud|nextcloud|api|always
+authproxy|authproxy:v8.0.16|running|Up 5 days||@FS@/opt/authproxy|authproxy|auth-proxy|unless-stopped
+firecrawl-mcp|firecrawl-mcp:3.27.3-6a58e3b|running|Up 5 days (healthy)|3000/tcp|@FS@/opt/nextcloud|nextcloud|firecrawl-mcp|always
+nextcloud-admin-panel|registry.example.org/nextcloud/nextcloud-admin-panel:latest|running|Up 5 days (healthy)|100.64.0.10:3081->3000/tcp, 127.0.0.1:3081->3000/tcp|@FS@/opt/nextcloud|nextcloud|admin-panel|always
+old-demo|alpine|exited|Exited (0) 4 weeks ago|||||no
+homepage|gethomepage/homepage:2.3.1|running|Up 4 weeks|100.64.0.10:5005->5005/tcp||||unless-stopped
+chat-meilisearch|getmeili/meilisearch:v1.35.1|running|Up 4 weeks|7700/tcp|@FS@/opt/nextcloud|nextcloud|meilisearch|always
+chat-mongodb|mongo:8.0.20|running|Up 4 weeks|27017/tcp|@FS@/opt/nextcloud|nextcloud|mongodb|always
+agent-dev|nousresearch/hermes-agent:latest|exited|Exited (0) 5 weeks ago|||||unless-stopped
+jellyfin_container|registry.gitlab.com/jellyfin-server/jellyfin-10:latest|running|Up 5 days|5520-5550/tcp, 100.64.0.10:8123->8123/tcp, 8000/tcp, 100.64.0.10:8443->8443/tcp, 19132/tcp, 100.64.0.10:25500-25600->25500-25600/tcp, 100.64.0.10:19132->19132/udp|@FS@/root/jellyfin|jellyfin|jellyfin|always
+hermes|3fc21559a8b7|running|Up 2 months|0.0.0.0:8642->8643/tcp, :::8642->8643/tcp||||unless-stopped

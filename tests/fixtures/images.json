@@ -1,0 +1,4 @@
+[
+  {"aliases":[{"name":"debian/12"}],"fingerprint":"abcdef1234567890","properties":{"description":"Debian bookworm amd64"},"size":104857600},
+  {"aliases":[],"fingerprint":"0123456789abcdef","properties":{},"size":52428800}
+]

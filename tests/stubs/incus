@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# Test-Stub für incus, gesteuert über Fixture-Dateien in $PD_FIX:
+#   cts              name|status|ipv4|docker   (docker: yes, no = nicht installiert, down = Daemon aus)
+#   cts.later        optional: ab dem 2. "list --format json" statt cts (z. B. neue IP)
+#   images.json      Antwort auf "image list --format json"
+#   fs/<ct>/…        Dateisystem der CTs für ls
+#   tools/incus/extra  optional: name|speicher|swap|disk|limits.memory|snapshots (Werkzeuge)
+#   tools/incus/pools.json, tools/incus/resources.<pool>.json  Antworten auf "incus query"
+# Steuerung: STUB_CT_ACTION_RC=<n> (Exit-Code von start/stop/restart)
+# Jeder Aufruf wird in $STUB_LOG protokolliert (ein Argument pro Zeile).
+# Wie echtes incus liest "exec" stdin leer, wenn es kein Terminal ist (Weiterleitung in den CT).
+# Fehlendes </dev/null in sshlobby fällt so in Tests auf. Mit STUB_TTY_INTERACTIVE=1 lassen nur
+# interaktive Befehle (Shells, docker exec, docker logs) stdin in Ruhe: wie am Terminal, wo die
+# Tastatureingaben für die Shell nicht im Menü-Eingabestrom stehen.
+set -u
+FIX=${PD_FIX:?PD_FIX fehlt}
+STUBS=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+{ echo "== incus"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+
+cts_file() {
+  local n=0
+  [ -f "$FIX/.listcount" ] && n=$(<"$FIX/.listcount")
+  n=$((n+1)); echo "$n" > "$FIX/.listcount"
+  if [ "$n" -gt 1 ] && [ -f "$FIX/cts.later" ]; then echo "$FIX/cts.later"; else echo "$FIX/cts"; fi
+}
+ct_field() { awk -F'|' -v n="$1" -v f="$2" '$1==n{print $f; found=1} END{exit !found}' "$FIX/cts"; }
+
+list_json() {
+  jq -Rn '[inputs | select(length>0) | split("|") | {name: .[0], status: .[1],
+    state: (if .[1]=="Running"
+            then {network: {lo: {addresses: [{family:"inet", address:"127.0.0.1"}]},
+                            eth0: {addresses: ([{family:"inet6", address:"fe80::1"}]
+                                               + (if .[2]=="" then [] else [{family:"inet", address:.[2]}] end))}}}
+            else {network: null} end)}]' < "$(cts_file)" | with_extra
+}
+with_extra() { # Speicher, Disk, Limits und Snapshots aus tools/incus/extra ergänzen
+  local x="$FIX/tools/incus/extra"
+  [ -f "$x" ] || { cat; return; }
+  jq --rawfile x "$x" '
+    ($x | split("\n") | map(select(length > 0 and (startswith("#") | not)) | split("|"))
+        | map({key: .[0], value: .}) | from_entries) as $e
+    | map(. as $c | ($e[$c.name] // null) as $r
+      | if $r == null then . + {snapshots: null, config: {}} else
+        . + {config: (if ($r[4] // "") != "" then {"limits.memory": $r[4]} else {} end),
+             snapshots: (if ($r[5] // "") == "" then null else
+               ($r[5] | split(",") | map(split("@") | {name: .[0], created_at: .[1]})) end)}
+        | if .status == "Running" then .state += {memory: {usage: ($r[1]|tonumber), swap_usage: ($r[2]|tonumber)},
+            disk: {root: {usage: ($r[3]|tonumber)}}, processes: 42} else . end end)'
+}
+
+do_exec() { # ct -- cmd…
+  local ct=$1 status docker; shift
+  [ "${1:-}" = "--" ] && shift
+  if ! status=$(ct_field "$ct" 2); then echo "Error: Not Found" >&2; exit 1; fi
+  [ "$status" = "Running" ] || { echo "Error: Instance is not running" >&2; exit 1; }
+  local interactive=0
+  case "$1 ${2:-} ${3:-}" in
+    bash*|"docker exec"*|"docker logs"*) interactive=1;;
+    "sh -c "*) [[ "${3:-}" == *docker* ]] || interactive=1;;
+  esac
+  if [ ! -t 0 ] && ! { [ "$interactive" -eq 1 ] && [ -n "${STUB_TTY_INTERACTIVE:-}" ]; }; then
+    cat > /dev/null
+  fi
+  docker=$(ct_field "$ct" 4)
+  case "$1" in
+    docker)
+      [ "$docker" = "no" ] && { echo "sh: 1: docker: not found" >&2; exit 127; }
+      shift
+      PD_CT=$ct PD_DOCKER_DOWN=$([ "$docker" = down ] && echo 1) exec "$STUBS/docker" "$@";;
+    sh)
+      # sh -c mit docker im Skript: echt ausführen, docker aus den Stubs
+      if [ "${2:-}" = "-c" ] && [[ "${3:-}" == *docker* ]]; then
+        [ "$docker" = "no" ] && { echo "sh: 1: docker: not found" >&2; exit 127; }
+        PD_CT=$ct PD_DOCKER_DOWN=$([ "$docker" = down ] && echo 1) PATH="$STUBS:$PATH" exec "$@"
+      fi
+      echo "STUB-SH $ct"; exit "${STUB_SHELL_RC:-0}";;
+    bash)
+      echo "STUB-BASH $ct"; exit "${STUB_SHELL_RC:-0}";;
+    ls|test)
+      # absolute Pfade auf fs/<ct> umbiegen
+      local a cmd=$1 args=()
+      shift
+      for a in "$@"; do [[ "$a" == /* ]] && a="$FIX/fs/$ct$a"; args+=("$a"); done
+      if [ "$cmd" = test ]; then test "${args[@]}"; exit; fi
+      exec ls "${args[@]}";;
+    *)
+      echo "STUB-EXEC $ct $*";;
+  esac
+}
+
+case "${1:-}" in
+  list)
+    if [ "${2:-}" = "--format" ] && [ "${3:-}" = "json" ]; then list_json
+    else echo "STUB-LIST $*"; fi;;
+  exec)
+    shift; do_exec "$@";;
+  info)
+    shift; showlog=0; name=""
+    for a in "$@"; do case "$a" in --show-log) showlog=1;; -*) ;; *) name=$a;; esac; done
+    ct_field "$name" 1 >/dev/null || { echo "Error: Not Found" >&2; exit 1; }
+    if [ "$showlog" -eq 1 ]; then echo "STUB-LOG $name"; else echo "Name: $name"; fi;;
+  start|stop|restart)
+    ct_field "${2:-}" 1 >/dev/null || { echo "Error: Not Found" >&2; exit 1; }
+    echo "STUB-CT-$1 $2"; exit "${STUB_CT_ACTION_RC:-0}";;
+  query)
+    case "${2:-}" in
+      "/1.0/storage-pools?recursion=1") cat "$FIX/tools/incus/pools.json" 2>/dev/null || echo '[]';;
+      /1.0/storage-pools/*/resources)
+        p=${2#/1.0/storage-pools/}; p=${p%/resources}
+        cat "$FIX/tools/incus/resources.$p.json" 2>/dev/null || { echo "Error: Storage pool not found" >&2; exit 1; };;
+      *) echo "incus-stub: query ${2:-} nicht emuliert" >&2; exit 1;;
+    esac;;
+  image)
+    if [ "${2:-}" = "list" ]; then cat "$FIX/images.json" 2>/dev/null || echo '[]'; fi;;
+  launch)
+    echo "Launching ${3:-}"
+    [ "${STUB_LAUNCH_RC:-0}" -eq 0 ] || { echo "Error: launch kaputt" >&2; exit "$STUB_LAUNCH_RC"; }
+    echo "${3:-}|Running|10.0.0.50|no" >> "$FIX/cts";;
+  *)
+    echo "incus-stub: nicht emuliert: $*" >&2; exit 1;;
+esac

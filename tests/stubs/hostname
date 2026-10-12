@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Test-Stub: fester Hostname ($STUB_HOSTNAME, Default testhost), unabhängig von der Maschine
+echo "${STUB_HOSTNAME:-testhost}"

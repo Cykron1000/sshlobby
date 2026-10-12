@@ -1,0 +1,1 @@
+[{"name":"default","driver":"btrfs","status":"Created","config":{"size":"60GiB","source":"/var/lib/incus/disks/default.img"}}]

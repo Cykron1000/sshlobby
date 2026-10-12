@@ -1,0 +1,10 @@
+100.64.0.10  docker-host                 user@  linux  idle; offers exit node                                                                       
+100.64.0.11    agent-dev             user@  linux  -                                                                                            
+100.64.0.12  tablet-1  user@  iOS    offline, last seen 1d ago                                                                    
+100.64.0.13  phone-1      user@  iOS    offline, last seen 5d ago                                                                    
+100.64.0.14     laptop-1            user@  macOS  -                                                                                            
+100.64.0.15   nas-server             user@  linux  active; direct [2001:db8::77]:48125, tx 21566933780 rx 1239147420  
+
+# Health check:
+#     - Subnet routing is enabled, but IP forwarding is disabled. Check that IP forwarding is enabled on your machine.
+#     - Some peers are advertising routes but --accept-routes is false

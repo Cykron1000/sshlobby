@@ -1,0 +1,6 @@
+alpha|Running|10.0.0.11|yes
+beta|Stopped||yes
+delta|Running||down
+gamma|Running|10.0.0.13|no
+ntfy|Running|10.0.0.14|no
+security|Running|10.0.0.15|yes

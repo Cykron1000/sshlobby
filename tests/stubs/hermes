@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test-Stub für die Hermes-CLI: echtes hermes darf in Tests nie laufen (produktive Instanzen).
+{ echo "== hermes"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "STUB-HERMES home=${HERMES_HOME:-} $*"
+exit "${STUB_HERMES_RC:-0}"

@@ -1,0 +1,43 @@
+{"__REALTIME_TIMESTAMP":"1791735472000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791736494000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791736713000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791752895000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791756248000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791763052000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791764933000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791765795000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791777983000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791778824000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791780270000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791783171000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: Protocol major versions differ: 2 vs. 1"}
+{"__REALTIME_TIMESTAMP":"1791785592000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785592000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785593000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785593000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785593000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785593000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785593000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785594000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785594000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785594000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785595000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785595000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785595000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785595000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785595000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785596000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785596000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785596000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785596000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785597000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785597000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785598000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785599000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785599000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791785600000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: connect_to 127.0.0.1 port 40953: failed."}
+{"__REALTIME_TIMESTAMP":"1791788084000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791789330000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791790720000000","_SYSTEMD_UNIT":"ssh.service","SYSLOG_IDENTIFIER":"sshd-session","MESSAGE":"error: kex_exchange_identification: read: Connection reset by peer"}
+{"__REALTIME_TIMESTAMP":"1791792000000000","SYSLOG_IDENTIFIER":"kernel","MESSAGE":"Out of memory: Killed process 4711 (node) total-vm:2048000kB"}
+{"__REALTIME_TIMESTAMP":"1791793000000000","_SYSTEMD_UNIT":"backup-nightly.service","SYSLOG_IDENTIFIER":"restic","MESSAGE":"Fatal: unable to open repository: connection refused"}
+{"__REALTIME_TIMESTAMP":"1791793100000000","_SYSTEMD_UNIT":"backup-nightly.service","SYSLOG_IDENTIFIER":"systemd","MESSAGE":[70,97,105,108]}

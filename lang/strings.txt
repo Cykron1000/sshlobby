@@ -1,0 +1,38 @@
+# sshlobby language file
+#
+# One block per key. Each line inside a block is "<language> = <text>".
+#
+#   [main.title]
+#   de = Projekt-Dashboard
+#   en = Project dashboard
+#
+# Rules
+# - English (en) is the base: every key needs an "en" line. A missing translation falls back to English.
+# - Placeholders are printf-style and filled in order: %s (text), %d (number). Keep the same number and
+#   order of placeholders in every language. A literal percent sign is %%. A line break is \n.
+# - Leading and trailing spaces around the text are removed. Keys use lowercase letters, digits, "." and "_".
+#
+# Add a language: add "<code> = …" lines (two-letter code, e.g. "fr") to the blocks you translate.
+# The settings menu lists every language that appears in this file. Select it there, with
+# LANGUAGE=<code> in ~/.config/sshlobby/config or SSHLOBBY_LANG=<code>.
+# Check coverage: bash tests/run.sh i18n
+
+[lang.name]
+de = Deutsch
+en = English
+
+[settings.language]
+de = Sprache / Language
+en = Language / Sprache
+
+[settings.language.auto]
+de = automatisch (Systemsprache: %s)
+en = automatic (system language: %s)
+
+[settings.language.saved]
+de = Sprache: %s. Die Oberfläche startet neu.
+en = Language: %s. The interface restarts.
+
+[settings.language.next_start]
+de = Sprache: %s. Wirkt ab dem nächsten Start.
+en = Language: %s. Takes effect on the next start.

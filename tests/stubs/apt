@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Test-Stub für apt: nur "apt list --upgradable" (aus $PD_FIX/tools/apt-upgradable.txt).
+# Ändernde Unterbefehle (update, upgrade, install …) schlagen laut fehl.
+{ echo "== apt"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+if [ "${1:-}" = list ] && [ "${2:-}" = --upgradable ]; then
+  echo "WARNING: apt does not have a stable CLI interface. Use with caution in scripts." >&2
+  cat "${PD_FIX:?}/tools/apt-upgradable.txt"; exit 0
+fi
+echo "apt-stub: nicht erlaubt: $*" >&2; exit 100

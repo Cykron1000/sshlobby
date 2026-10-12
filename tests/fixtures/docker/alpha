@@ -1,0 +1,3 @@
+myapp|ghcr.io/x/myapp:latest|running|Up 3 hours (unhealthy)||
+app|nginx:1.27|running|Up 2 hours (healthy)|0.0.0.0:80->80/tcp|/opt/it's app
+db|postgres:16|exited|Exited (0) 2 days ago||/opt/db

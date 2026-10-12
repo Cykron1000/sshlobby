@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Test-Stub: echtes ssh darf in Tests nie laufen
+{ echo "== ssh"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "STUB-SSH $*"

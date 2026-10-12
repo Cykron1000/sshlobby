@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Test-Stub für ss: Antwort aus $PD_FIX/tools/ss.txt (Format von "ss -tulpnH", Beispieldaten)
+{ echo "== ss"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+cat "${PD_FIX:?}/tools/ss.txt" 2>/dev/null

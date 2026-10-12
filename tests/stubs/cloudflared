@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Test-Stub für cloudflared: nur vorhanden (Verfügbarkeitsprüfung), tut nichts
+{ echo "== cloudflared"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "cloudflared version 2026.9.0 (stub)"

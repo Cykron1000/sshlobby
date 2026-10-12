@@ -1,0 +1,564 @@
+# sshlobby language file: main menu and screens (lib/screens.sh), Docker backend (lib/backend_docker.sh),
+# first-run setup (lib/setup.sh). Format: see lang/strings.txt.
+
+# ─── Durations and container status (compact cells) ───
+[screens.unit.second]
+de = s
+en = s
+
+[screens.unit.minute]
+de = min
+en = min
+
+[screens.unit.hour]
+de = h
+en = h
+
+[screens.unit.day]
+de = T
+en = d
+
+[screens.unit.week]
+de = W
+en = w
+
+[screens.unit.month]
+de = Mon
+en = mo
+
+[screens.unit.year]
+de = J
+en = y
+
+[screens.status.exited]
+de = exit %s, vor %s
+en = exit %s, %s ago
+
+[screens.status.restarting]
+de = startet neu
+en = restarting
+
+[screens.unit.cts]
+de = CTs
+en = CTs
+
+[screens.unit.containers]
+de = Container
+en = containers
+
+# ─── Main menu ───
+[screens.main.tools]
+de = Werkzeuge
+en = Tools
+
+[screens.main.tools_desc]
+de = Server-Status, Logs, Health-Scan …
+en = Server status, logs, health scan …
+
+[screens.key.host_shell]
+de = Host-Shell
+en = host shell
+
+[screens.key.settings]
+de = Einstellungen
+en = settings
+
+[screens.key.reload]
+de = neu laden
+en = reload
+
+[screens.key.fav_add]
+de = Favorit %s hinzufügen
+en = add favorite %s
+
+[screens.key.fav_remove]
+de = Favorit %s entfernen
+en = remove favorite %s
+
+[screens.main.quit_shell]
+de = Shell
+en = Shell
+
+[screens.main.quit_logout]
+de = Logout
+en = Logout
+
+[screens.section.recent]
+de = Zuletzt
+en = Recent
+
+[screens.section.favorites]
+de = Favoriten
+en = Favorites
+
+[screens.section.projects_cts]
+de = Projekte / Container
+en = Projects / containers
+
+[screens.section.compose_projects]
+de = Compose-Projekte
+en = Compose projects
+
+[screens.recent.tool]
+de = Werkzeug · %s
+en = Tool · %s
+
+[screens.target.ctshell]
+de = %s (CT-Shell)
+en = %s (CT shell)
+
+[screens.fav.ct_gone]
+de = CT fehlt
+en = CT missing
+
+[screens.fav.container_gone]
+de = Container fehlt
+en = container missing
+
+[screens.main.no_cts]
+de = (keine Incus-Container gefunden, läuft incus?)
+en = (no Incus containers found, is incus running?)
+
+[screens.main.no_containers]
+de = (keine Container gefunden)
+en = (no containers found)
+
+[screens.main.cts_active]
+de = %s CTs aktiv
+en = %s CTs running
+
+[screens.main.containers_running]
+de = %s/%s Container laufen
+en = %s/%s containers running
+
+[screens.main.standalone]
+de = Einzelcontainer
+en = Standalone containers
+
+[screens.main.no_project]
+de = ohne Compose-Projekt
+en = no Compose project
+
+[screens.favgone.container]
+de = Container „%s“ gibt es nicht mehr.
+en = Container "%s" no longer exists.
+
+[screens.favgone.ct]
+de = CT „%s“ gibt es nicht mehr.
+en = CT "%s" no longer exists.
+
+[screens.favgone.confirm]
+de = %s Favorit %s entfernen?
+en = %s Remove favorite %s?
+
+# ─── Info labels ───
+[screens.info.info]
+de = Info
+en = Info
+
+[screens.info.dir]
+de = Ordner
+en = Folder
+
+[screens.info.image]
+de = Image
+en = Image
+
+[screens.info.status]
+de = Status
+en = Status
+
+[screens.info.health]
+de = Health
+en = Health
+
+[screens.info.ports]
+de = Ports
+en = Ports
+
+[screens.info.project]
+de = Projekt
+en = Project
+
+[screens.info.compose]
+de = Compose
+en = Compose
+
+[screens.info.restart_policy]
+de = Neustart
+en = Restart
+
+[screens.info.fastpath]
+de = Fastpath
+en = Fastpath
+
+# ─── Action labels ───
+[screens.action.restart]
+de = Restart
+en = Restart
+
+[screens.action.stop]
+de = Stop
+en = Stop
+
+[screens.action.start]
+de = Start
+en = Start
+
+[screens.action.open_compose_dir]
+de = Compose-Ordner öffnen
+en = Open Compose folder
+
+# ─── CT screen ───
+[screens.ct.missing]
+de = CT „%s“ gibt es nicht (mehr).
+en = CT "%s" does not exist (anymore).
+
+[screens.ct.section_docker]
+de = Docker-Container
+en = Docker containers
+
+[screens.ct.no_containers]
+de = (keine Docker-Container)
+en = (no Docker containers)
+
+[screens.ct.section_ct]
+de = CT
+en = CT
+
+[screens.ct.shell]
+de = CT-Shell
+en = CT shell
+
+[screens.ct.start]
+de = CT starten
+en = Start CT
+
+[screens.ct.stop]
+de = CT stoppen
+en = Stop CT
+
+[screens.ct.restart]
+de = CT neu starten
+en = Restart CT
+
+[screens.ct.log]
+de = Log
+en = Log
+
+[screens.ct.resources]
+de = Ressourcen
+en = Resources
+
+[screens.ct.resources_desc]
+de = CPU, RAM, Disk, Prozesse
+en = CPU, RAM, disk, processes
+
+[screens.ct.confirm_stop]
+de = CT %s stoppen?
+en = Stop CT %s?
+
+[screens.ct.confirm_restart]
+de = CT %s neu starten?
+en = Restart CT %s?
+
+# ─── Compose project screen ───
+[screens.project.no_containers]
+de = Projekt „%s“ hat keine Container (mehr).
+en = Project "%s" has no containers (anymore).
+
+[screens.project.section_containers]
+de = Container
+en = Containers
+
+[screens.project.standalone_info]
+de = Container ohne Compose-Projekt
+en = Containers without a Compose project
+
+[screens.project.section_project]
+de = Projekt
+en = Project
+
+[screens.project.logs]
+de = Logs aller Services folgen
+en = Follow logs of all services
+
+[screens.project.logs_desc]
+de = compose logs -f --tail 100, Ctrl-C zurück
+en = compose logs -f --tail 100, Ctrl-C to go back
+
+[screens.project.all_services]
+de = alle Services
+en = all services
+
+[screens.project.dir_desc]
+de = Host-Shell in %s
+en = Host shell in %s
+
+[screens.project.running]
+de = %s/%s laufen
+en = %s/%s running
+
+[screens.project.confirm_restart]
+de = Projekt %s neu starten (alle Services)?
+en = Restart project %s (all services)?
+
+[screens.project.confirm_stop]
+de = Projekt %s stoppen (alle Services)?
+en = Stop project %s (all services)?
+
+# ─── Container screen ───
+[screens.container.missing]
+de = Container „%s“ gibt es%s nicht (mehr).
+en = Container "%s" does not exist%s (anymore).
+
+[screens.container.no_healthcheck]
+de = kein Healthcheck
+en = no healthcheck
+
+[screens.container.dir_in_ct]
+de = (Ordner liegt im CT)
+en = (folder is inside the CT)
+
+[screens.container.shell]
+de = Shell rein
+en = Open shell
+
+[screens.container.logs]
+de = Logs folgen
+en = Follow logs
+
+[screens.container.logs_desc]
+de = tail 100 + follow, Ctrl-C zurück
+en = tail 100 + follow, Ctrl-C to go back
+
+[screens.container.confirm_restart]
+de = %s neu starten?
+en = Restart %s?
+
+[screens.container.confirm_stop]
+de = %s stoppen?
+en = Stop %s?
+
+# ─── Tools menu ───
+[screens.tools.title]
+de = Server-Werkzeuge
+en = Server tools
+
+[screens.tools.mode]
+de = Modus %s
+en = Mode %s
+
+# ─── Docker backend ───
+[docker.err.ct_down]
+de = CT läuft nicht
+en = CT is not running
+
+[docker.err.not_installed]
+de = kein Docker installiert
+en = Docker is not installed
+
+[docker.err.unreachable_ct]
+de = Docker im CT nicht erreichbar
+en = Docker in the CT is not reachable
+
+[docker.err.unreachable]
+de = Docker nicht erreichbar
+en = Docker is not reachable
+
+[docker.in]
+de = in %s
+en = in %s
+
+[docker.preflight.missing]
+de = Container „%s“ gibt es%s nicht (mehr)
+en = Container "%s" does not exist%s (anymore)
+
+[docker.preflight.not_running]
+de = Container „%s“ läuft nicht (%s)
+en = Container "%s" is not running (%s)
+
+[docker.logs.ended]
+de = — Logfolge beendet —
+en = — log follow ended —
+
+[docker.logs.label]
+de = Logs %s
+en = Logs %s
+
+[docker.logs.project]
+de = Logs Projekt %s
+en = Logs of project %s
+
+[docker.verb.start]
+de = starte
+en = starting
+
+[docker.verb.stop]
+de = stoppe
+en = stopping
+
+[docker.verb.restart]
+de = restarte
+en = restarting
+
+[docker.task.project]
+de = Projekt %s: %s
+en = Project %s: %s
+
+[docker.compose.no_dir]
+de = Kein Compose-Ordner bekannt.
+en = No Compose folder known.
+
+[docker.compose.dir_missing]
+de = Ordner %s gibt es nicht
+en = Folder %s does not exist
+
+[docker.compose.ct_down]
+de = CT „%s“ läuft nicht
+en = CT "%s" is not running
+
+[docker.compose.dir_missing_ct]
+de = Ordner %s gibt es in %s nicht
+en = Folder %s does not exist in %s
+
+# ─── Setup ───
+[setup.err.bad_mode]
+de = sshlobby: SSHLOBBY_MODE=„%s“ ungültig (docker, incus, layered)
+en = sshlobby: SSHLOBBY_MODE="%s" is invalid (docker, incus, layered)
+
+[setup.state.ok]
+de = erreichbar, %s %s
+en = reachable, %s %s
+
+[setup.state.down]
+de = installiert, aber nicht erreichbar
+en = installed, but not reachable
+
+[setup.state.missing]
+de = nicht installiert
+en = not installed
+
+[setup.unit.cts]
+de = CTs
+en = CTs
+
+[setup.unit.containers]
+de = Container
+en = containers
+
+[setup.loading]
+de = Erkenne Umgebung
+en = Detecting environment
+
+[setup.info.docker_host]
+de = %s (Host)
+en = %s (host)
+
+[setup.info.docker_in_cts]
+de = Docker in CTs
+en = Docker in CTs
+
+[setup.info.yes_example]
+de = ja (z. B. %s)
+en = yes (e.g. %s)
+
+[setup.info.no]
+de = nein
+en = no
+
+[setup.info.suggestion]
+de = Vorschlag
+en = Suggested
+
+[setup.info.config]
+de = Config
+en = Config
+
+[setup.info.config_new]
+de = %s (neu)
+en = %s (new)
+
+[setup.detected]
+de = erkannt
+en = detected
+
+[setup.title]
+de = Einrichtung
+en = Setup
+
+[setup.choose_mode]
+de = Modus wählen
+en = Choose mode
+
+[setup.err.config_write]
+de = Config nicht schreibbar: %s
+en = Cannot write config: %s
+
+[setup.saved]
+de = Gespeichert: MODE=%s in %s
+en = Saved: MODE=%s in %s
+
+[setup.mode.docker]
+de = Docker-Container direkt auf dem Host
+en = Docker containers directly on the host
+
+[setup.mode.incus]
+de = nur Incus-CTs
+en = Incus CTs only
+
+[setup.mode.layered]
+de = Incus-CTs mit eigenem Docker darin
+en = Incus CTs with their own Docker inside
+
+[setup.label]
+de = Anzeigename
+en = Display name
+
+[setup.desc.none]
+de = nichts übernehmen
+en = import nothing
+
+[setup.desc.keep]
+de = vorhandene Beschreibungen behalten
+en = keep existing descriptions
+
+[setup.desc.target]
+de = Ziel
+en = Target
+
+[setup.desc.target_backup]
+de = %s (vorhandene Datei wird nach descriptions.bak gesichert)
+en = %s (existing file is backed up to descriptions.bak)
+
+[setup.desc.section]
+de = Beispiel-Beschreibungen
+en = Example descriptions
+
+[setup.desc.entries]
+de = %s Einträge
+en = %s entries
+
+[setup.desc.already]
+de = bereits übernommen
+en = already imported
+
+[setup.desc.matches]
+de = passt zu %s
+en = matches %s
+
+[setup.desc.none_label]
+de = keine
+en = none
+
+[setup.desc.title]
+de = Beschreibungen
+en = Descriptions
+
+[setup.desc.question]
+de = Beispiel übernehmen?
+en = Import an example?
+
+[setup.desc.imported]
+de = Beschreibungen aus examples/descriptions.%s übernommen
+en = Descriptions imported from examples/descriptions.%s

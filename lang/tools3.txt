@@ -1,0 +1,294 @@
+# sshlobby language file: tools "Ports & listeners", "Disk space", "Network & access", "Security check"
+# Format and rules: see the header of lang/strings.txt.
+
+# ─── Ports & listeners (lib/tools_ports.sh) ─────────────────────────────────
+
+[ports.title]
+de = Ports & Listener
+en = Ports & listeners
+
+[ports.desc]
+de = ss: öffentlich, Tailscale, localhost
+en = ss: public, Tailscale, localhost
+
+[ports.cat.public]
+de = Öffentlich erreichbar
+en = Publicly reachable
+
+[ports.cat.tailscale]
+de = Nur über Tailscale
+en = Tailscale only
+
+[ports.cat.private]
+de = Privat / Docker-Bridge
+en = Private / Docker bridge
+
+[ports.cat.local]
+de = Nur localhost
+en = localhost only
+
+[ports.none]
+de = ss lieferte keine Listener.
+en = ss returned no listeners.
+
+[ports.public_n]
+de = %s öffentliche Listener: %s
+en = %s public listeners: %s
+
+[ports.public_none]
+de = keine öffentlichen Listener
+en = no public listeners
+
+[ports.hint.docker_bypass]
+de = Docker-Freigaben auf 0.0.0.0/:: umgehen ufw und INPUT-Regeln. Nicht öffentlich gewollt: an 127.0.0.1 oder die Tailscale-IP binden.
+en = Docker ports published on 0.0.0.0/:: bypass ufw and INPUT rules. Not meant to be public: bind to 127.0.0.1 or the Tailscale IP.
+
+[ports.hint.noproc]
+de = Prozesse fehlen teilweise: ss zeigt sie nur als root.
+en = Some processes are missing: ss only shows them to root.
+
+[ports.hint.layered]
+de = Ports von Docker in den CTs erscheinen hier nur, wenn Incus sie per proxy-Device auf den Host legt.
+en = Docker ports inside CTs only show up here if Incus forwards them to the host with a proxy device.
+
+[ports.owner.hostnet]
+de = Container (Host-Netz)
+en = Container (host network)
+
+[ports.owner.session]
+de = Login-Sitzung
+en = Login session
+
+# ─── Disk space (lib/tools_storage.sh) ──────────────────────────────────────
+
+[storage.title]
+de = Speicherplatz
+en = Disk space
+
+[storage.desc]
+de = df, Docker, Incus-Pool, Snapshots
+en = df, Docker, Incus pool, snapshots
+
+[storage.head.fs]
+de = Dateisysteme
+en = Filesystems
+
+[storage.journal.used]
+de = %s belegt
+en = %s used
+
+[storage.head.pools]
+de = Incus-Storage-Pools
+en = Incus storage pools
+
+[storage.pool.loop]
+de = Loop-Datei %s: läuft sie voll, stehen alle CTs. Wächst nicht von selbst.
+en = Loop file %s: if it fills up, all CTs stop. It does not grow on its own.
+
+[storage.pool.none]
+de = keine Pools gefunden (incus nicht erreichbar?)
+en = no pools found (incus unreachable?)
+
+[storage.head.ct_disk]
+de = Disk je CT (Root-Volume)
+en = Disk per CT (root volume)
+
+[storage.head.snapshots]
+de = Incus-Snapshots
+en = Incus snapshots
+
+[storage.snap.hint]
+de = Snapshots belegen Pool-Platz, solange sie existieren.
+en = Snapshots take up pool space as long as they exist.
+
+[storage.none]
+de = keine
+en = none
+
+[storage.head.images]
+de = Größte Images
+en = Largest images
+
+[storage.img.noname]
+de = (ohne Namen)
+en = (untagged)
+
+[storage.img.unused]
+de = ungenutzt
+en = unused
+
+[storage.containers]
+de = %s Container
+en = %s containers
+
+[storage.container_one]
+de = 1 Container
+en = 1 container
+
+[storage.img.summary]
+de = %s Images ohne Container, davon %s ohne Namen
+en = %s images without containers, %s of them untagged
+
+[storage.img.prune_dangling]
+de = (nur Images ohne Namen)
+en = (untagged images only)
+
+[storage.img.prune_all]
+de = (alle ungenutzten Images, vorher prüfen)
+en = (all unused images, check first)
+
+[storage.head.volumes]
+de = Volumes
+en = Volumes
+
+[storage.vol.orphan]
+de = verwaist
+en = orphaned
+
+[storage.cache]
+de = Build-Cache: %s freigebbar
+en = Build cache: %s reclaimable
+
+# ─── Network & access (lib/tools_network.sh) ────────────────────────────────
+
+[net.title]
+de = Netzwerk & Zugänge
+en = Network & access
+
+[net.desc]
+de = Tailscale, cloudflared, Caddy, WireGuard
+en = Tailscale, cloudflared, Caddy, WireGuard
+
+[net.ts.empty]
+de = tailscale status liefert nichts (nicht angemeldet oder Dienst aus)
+en = tailscale status returned nothing (not logged in or service off)
+
+[net.ts.self]
+de = Dieser Knoten
+en = This node
+
+[net.ts.exit_node]
+de = Exit-Node
+en = Exit node
+
+[net.ts.exit_offered]
+de = wird angeboten
+en = offered
+
+[net.ts.exit_not_offered]
+de = nicht angeboten
+en = not offered
+
+[net.cf.ingress]
+de = Ingress aus %s:
+en = Ingress from %s:
+
+[net.cf.fallback]
+de = (Rest)
+en = (fallback)
+
+[net.head.caddy]
+de = Caddy-Sites (/etc/caddy/Caddyfile)
+en = Caddy sites (/etc/caddy/Caddyfile)
+
+[net.caddy.files]
+de = Dateien
+en = files
+
+[net.wg.none]
+de = keine WireGuard-Schnittstellen (oder nicht root)
+en = no WireGuard interfaces (or not root)
+
+[net.wg.interface]
+de = Schnittstelle
+en = Interface
+
+[net.wg.if_port]
+de = %s Port %s
+en = %s port %s
+
+[net.wg.peer]
+de = Peer %s %s %s Handshake %s rx %s tx %s
+en = Peer %s %s %s handshake %s rx %s tx %s
+
+[net.wg.never]
+de = nie
+en = never
+
+[net.wg.minutes]
+de = %s min
+en = %s min
+
+# ─── Security check (lib/tools_security.sh) ─────────────────────────────────
+
+[sec.title]
+de = Sicherheits-Check
+en = Security check
+
+[sec.desc]
+de = SSH, sshd -T, offene Ports, Updates
+en = SSH, sshd -T, open ports, updates
+
+[sec.head.fails]
+de = SSH-Fehlversuche (24 h)
+en = Failed SSH logins (24 h)
+
+[sec.none]
+de = keine
+en = none
+
+[sec.fails.summary]
+de = %s Fehlversuche von %s Adressen (Top 5 oben)
+en = %s failed attempts from %s addresses (top 5 above)
+
+[sec.head.logins]
+de = Letzte erfolgreiche Logins
+en = Recent successful logins
+
+[sec.logins.none]
+de = keine in den letzten 24 h
+en = none in the last 24 h
+
+[sec.head.sshd]
+de = sshd-Konfiguration (sshd -T)
+en = sshd configuration (sshd -T)
+
+[sec.sshd.unavailable]
+de = sshd -T nicht verfügbar (nur als root)
+en = sshd -T unavailable (root only)
+
+[sec.head.ports]
+de = Öffentliche Ports
+en = Public ports
+
+[sec.ports.details]
+de = Details im Werkzeug „%s“
+en = Details in the "%s" tool
+
+[sec.head.updates]
+de = Automatische Updates
+en = Automatic updates
+
+[sec.uu.active]
+de = unattended-upgrades aktiv (20auto-upgrades)
+en = unattended-upgrades active (20auto-upgrades)
+
+[sec.uu.off]
+de = unattended-upgrades installiert, aber nicht eingeschaltet
+en = unattended-upgrades installed but not enabled
+
+[sec.uu.missing]
+de = unattended-upgrades nicht eingerichtet
+en = unattended-upgrades not set up
+
+[sec.reboot.needed]
+de = Neustart nötig
+en = Reboot required
+
+[sec.reboot.kernel]
+de = (Kernel %s installiert, läuft %s)
+en = (kernel %s installed, running %s)
+
+[sec.reboot.none]
+de = kein Neustart nötig
+en = no reboot required

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test-Stub für apt-get: ändert nie etwas, protokolliert nur. Exit-Code über STUB_APT_RC.
+{ echo "== apt-get"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "STUB-APT-GET $*"
+exit "${STUB_APT_RC:-0}"

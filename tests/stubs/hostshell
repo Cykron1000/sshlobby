@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Test-Stub für $SHELL: Host-Shell (z. B. Compose-Ordner im docker-Modus) ohne echte Shell
+{ echo "== hostshell"; printf '  %s\n' "$PWD" "$@"; } >> "${STUB_LOG:-/dev/null}"
+echo "STUB-HOSTSHELL $PWD"
+exit "${STUB_SHELL_RC:-0}"

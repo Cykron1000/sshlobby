@@ -1,0 +1,13 @@
+# Descriptions for an Incus host with Docker inside the CTs (mode layered). Format: name|text
+# Use them with sshlobby --setup or copy the file to ~/.config/sshlobby/descriptions
+agent-dev|Hermes AI stack: web UI :8644, gateway :8643, tunnel
+webapp-dev|Web app DEV: Quarkus, Keycloak, OIDC login
+webapp-prod|Web app PROD (:main)
+auth|Pocket ID SSO/OIDC :1411
+pihole|Pi-hole DNS and ad blocking, web UI :8088
+atuin|Atuin shell history sync with Postgres
+security|SecObserve CVE management: backend, frontend, Postgres
+ntfy|Self-hosted ntfy push alerts :2586
+research|Research and development (no containers yet)
+games|Games project /opt/games (no Docker)
+shop|Price monitoring
