@@ -2,6 +2,12 @@
 
 All notable changes to sshlobby. Versions follow [semantic versioning](https://semver.org/).
 
+## 3.0.2 (2026-10-12)
+
+- Fix: the release archive of 3.0.1 contained a symbolic link (`tests/stubs/wget`), and the archive check of
+  `sshlobby update` rejects links. The repository now has no links, and a test makes sure it stays that way,
+  so releases from 3.0.2 on install with `sshlobby update`. 3.0.1 itself installs only with `install.sh`.
+
 ## 3.0.1 (2026-10-12)
 
 - Release check: once a day sshlobby asks GitHub in the background whether a newer release exists

@@ -273,6 +273,20 @@ t_update_key_u_line() {                             # Taste u: prüfen, nachfrag
   hasnt "$after" "Neue Version"; hasnt "$after" "u) Update"                       # danach kein Hinweis mehr
 }
 
+t_update_release_archive_passes_check() {          # das eigene Release-Archiv muss die Archivprüfung bestehen
+  # Installationen ab 3.0.1 lehnen Archive mit Links, Geräten usw. ab: im Repo darf es so etwas nie geben,
+  # sonst lässt sich das nächste Release nicht mehr mit sshlobby update installieren.
+  local bad out
+  bad=$(find "$ROOT" -path "$ROOT/.git" -prune -o \( -type l -o ! -type f ! -type d \) -print)
+  [ -z "$bad" ] || die "Links oder Sonderdateien im Repo, sshlobby update würde das Release ablehnen:\n$bad"
+  tar -czf "$W/self.tar.gz" -C "$(dirname "$ROOT")" --exclude=.git "$(basename "$ROOT")" || die "tar fehlgeschlagen"
+  # shellcheck disable=SC2016 # expandiert erst in bash -c
+  out=$(bash -c 'CONF_FILE=/nonexistent; . "$1/lib/core.sh"; . "$1/lib/update.sh"; upd_unpack "$2" "$3"; echo "rc=$? $UPD_ERR"' \
+    _ "$ROOT" "$W/self.tar.gz" "$W/self")
+  eq "$out" "rc=0 " "Archivprüfung des eigenen Archivs"
+  cmp -s "$ROOT/lib/update.sh" "$W/self/lib/update.sh" || die "Archiv unvollständig entpackt"
+}
+
 t_install_update_flag() {                           # install.sh --update direkt, unbekannte Argumente
   mkdir -p "$W/bin"; printf '# nur das\n' > "$W/bashrc"
   safe_paths "$ROOT/install.sh"

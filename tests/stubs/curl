@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Test-Stub für curl und wget (wget ist ein Symlink hierher): nie Netzwerk, Antworten aus Dateien.
+# Test-Stub für curl und wget (tests/stubs/wget ruft diesen Stub mit STUB_AS=wget auf): nie Netzwerk,
+# Antworten aus Dateien.
 #   https://api.github.com/repos/<repo>/releases/latest      → $STUB_UPDATE_DIR/latest.json
 #   https://github.com/<repo>/archive/refs/tags/<tag>.tar.gz → $STUB_UPDATE_DIR/<tag>.tar.gz
 # Fehlt die Datei: Exit 22 (curl -f bei HTTP 404) bzw. 8 (wget: Fehlerantwort des Servers).
 # Ohne STUB_UPDATE_DIR: Exit 6 bzw. 4 (keine Verbindung). STUB_UPDATE_RC=<n>: jeder Aufruf endet mit n.
 # Aufrufe landen mit allen Argumenten in STUB_LOG.
-name=${0##*/}
+name=${STUB_AS:-${0##*/}}
 { echo "== $name"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
 out=- url=""
 while [ $# -gt 0 ]; do
