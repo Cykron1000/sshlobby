@@ -1,1 +1,5 @@
-curl
+#!/usr/bin/env bash
+# Test-Stub für wget: derselbe Stub wie tests/stubs/curl, nur unter dem Namen wget (Exit-Codes, Log).
+# Bewusst eine Datei und kein Symlink: Release-Archive dürfen keine Links enthalten, sonst lehnt
+# sshlobby update sie ab (siehe t_update_release_archive_passes_check).
+STUB_AS=wget exec "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/curl" "$@"
