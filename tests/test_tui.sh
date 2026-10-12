@@ -15,8 +15,8 @@ tui_start() {
   while [ $# -gt 0 ]; do [ "$1" = "--" ] && { shift; args=("$@"); break; }; envs+=("$1"); shift; done
   TS="pd$$x${RANDOM}"
   {
-    printf 'export PATH=%q HOME=%q PD_FIX=%q STUB_LOG=%q SHELL=%q LC_ALL=C.UTF-8 SSHLOBBY_LANG=%q STUB_TTY_INTERACTIVE=1\n' \
-      "$PATH" "$HOME" "$PD_FIX" "$STUB_LOG" "$SHELL" "${SSHLOBBY_LANG:-de}"
+    printf 'export PATH=%q HOME=%q PD_FIX=%q STUB_LOG=%q SHELL=%q LC_ALL=C.UTF-8 SSHLOBBY_LANG=%q STUB_TTY_INTERACTIVE=1 SSHLOBBY_UPDATE_CHECK=%q\n' \
+      "$PATH" "$HOME" "$PD_FIX" "$STUB_LOG" "$SHELL" "${SSHLOBBY_LANG:-de}" "${SSHLOBBY_UPDATE_CHECK:-no}"
     for a in "${envs[@]}"; do printf 'export %q\n' "$a"; done
     printf 'stty sane\nbash %q' "$PD"; [ ${#args[@]} -eq 0 ] || printf ' %q' "${args[@]}"; printf '\n'
     printf 'echo "RC=$?" > %q\n' "$W/tui.rc"

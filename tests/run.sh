@@ -24,11 +24,13 @@ SYSBIN="$BASE/sysbin"; mkdir -p "$SYSBIN"
 for c in bash sh env setsid jq awk sed grep cut tr sort head tail wc date mktemp mv cp cat rm rmdir \
          mkdir touch ln readlink dirname basename seq sleep timeout id install cmp find ls tput stty \
          uptime df ps free uniq tee chmod stat true false diff od xargs tac tmux shellcheck kill \
-         printf test expr realpath comm paste nl yes mkfifo; do
+         printf test expr realpath comm paste nl yes mkfifo tar gzip sha256sum; do
   p=$(type -P "$c") && ln -s "$p" "$SYSBIN/$c"
 done
-export PATH="$T/stubs:$SYSBIN" LC_ALL=C.UTF-8 SSHLOBBY_LANG=de  # Tests prüfen die deutschen Texte
-for c in docker incus systemctl ssh journalctl hostname; do
+# Tests prüfen die deutschen Texte. Die automatische Release-Prüfung ist aus (die Update-Tests schalten
+# sie gezielt ein), curl und wget sind Stubs: kein Test erreicht das Netz.
+export PATH="$T/stubs:$SYSBIN" LC_ALL=C.UTF-8 SSHLOBBY_LANG=de SSHLOBBY_UPDATE_CHECK=no
+for c in docker incus systemctl ssh journalctl hostname curl wget; do
   [ "$(type -P "$c")" = "$T/stubs/$c" ] || { echo "ABBRUCH: $c ist nicht der Stub" >&2; exit 1; }
 done
 # Shells im Stub lassen stdin in Ruhe (wie am Terminal), nicht-interaktive incus exec lesen es leer

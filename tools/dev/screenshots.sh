@@ -10,6 +10,7 @@ set -u
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 OUT=${1:-$ROOT/docs/screenshots}
 LANG_SHOTS=${SHOTS_LANG:-en}
+VERSION_SHOTS=$(sed -n 's/^VERSION="\(.*\)"$/\1/p' "$ROOT/sshlobby.sh")
 TMUX_BIN=$(type -P tmux) || { echo "tmux missing" >&2; exit 1; }
 PY=$(type -P python3) || { echo "python3 missing" >&2; exit 1; }
 "$PY" -c 'import PIL' 2>/dev/null || { echo "python3 Pillow missing (apt-get install python3-pil)" >&2; exit 1; }
@@ -51,7 +52,13 @@ fresh() { # config lines…
   sed -i 's/^chat-mongodb|mongo:8.0.20|running|Up 4 weeks|/chat-mongodb|mongo:8.0.20|running|Up 4 weeks (unhealthy)|/' "$E/fix/host-docker"
   # login hook as written by install.sh, so the settings show the normal state
   sed -n '/^# >>> sshlobby >>>$/,/^# <<< sshlobby <<<$/p' "$ROOT/install.sh" > "$E/home/.bashrc"
+  # release check done a moment ago, nothing newer: no background check, settings show "on · checked just now"
+  update_cache "v$VERSION_SHOTS"
   [ $# -gt 0 ] && printf '%s\n' "$@" > "$E/home/.config/sshlobby/config"
+}
+update_cache() { # tag → cached result of the daily release check in the current environment
+  printf 'checked=%s\nrepo=Nikolai-Slsr/sshlobby\nstatus=ok\ntag=%s\nurl=https://github.com/Nikolai-Slsr/sshlobby/releases/tag/%s\n' \
+    "$(date +%s)" "$1" "$1" > "$E/home/.config/sshlobby/update-check"
 }
 # Take a view: shot file.png "window title" width height "wait-for" keys… [-- env…]
 # Keys: @text waits for text, !text waits until text is gone, +text types text, anything else is a tmux key name.
@@ -80,15 +87,17 @@ shot() {
   T capture-pane -e -p -t "s$N" > "$BASE/$file.ans"
   [ -n "${SHOTS_KEEP:-}" ] && cp "$BASE/$file.ans" "$SHOTS_KEEP/"
   T kill-session -t "s$N"
-  "$PY" "$ROOT/tools/dev/ansi2png.py" "$OUT/$file" "$w" "$h" "$title" "$BASE/$file.ans" && echo "  $OUT/$file"
+  PYTHONDONTWRITEBYTECODE=1 "$PY" "$ROOT/tools/dev/ansi2png.py" "$OUT/$file" "$w" "$h" "$title" "$BASE/$file.ans" && echo "  $OUT/$file"
 }
 
 mkdir -p "$OUT"
 case "$LANG_SHOTS" in
   de) W_MAIN="COMPOSE-PROJEKTE" W_TOOLS="Server-Werkzeuge" W_CHECK="Server-Check" W_CONFIRM="[j/N]"
-      W_LAYERED="PROJEKTE / CONTAINER" W_SETTINGS="Einstellungen" W_SETUP="Modus" W_CONT="CONTAINER" W_CHECKING="Prüfe den Server";;
+      W_LAYERED="PROJEKTE / CONTAINER" W_SETTINGS="Einstellungen" W_SETUP="Modus" W_CONT="CONTAINER" W_CHECKING="Prüfe den Server"
+      W_UPDATE="Neue Version";;
   *)  W_MAIN="COMPOSE PROJECTS" W_TOOLS="Server tools" W_CHECK="Server check" W_CONFIRM="[y/N]"
-      W_LAYERED="PROJECTS / CONTAINERS" W_SETTINGS="Settings" W_SETUP="mode" W_CONT="CONTAINERS" W_CHECKING="Checking the server";;
+      W_LAYERED="PROJECTS / CONTAINERS" W_SETTINGS="Settings" W_SETUP="mode" W_CONT="CONTAINERS" W_CHECKING="Checking the server"
+      W_UPDATE="New version";;
 esac
 
 fresh "MODE=docker" "HOST_LABEL=web-01"
@@ -101,10 +110,14 @@ shot confirm.png "root@web-01: ~" 104 22 "$W_CONFIRM" 7 Enter Down Enter Down Do
 shot tools.png "root@web-01: ~" 104 23 "$W_TOOLS" 9 Enter
 shot server-check.png "root@web-01: ~" 104 17 "› $W_CHECK" 9 Enter "@$W_TOOLS" 5 Enter "@› $W_CHECK" "!$W_CHECKING"
 
+# Main menu with the hint for a newer release (cached result of the daily check, no network)
+update_cache v3.1.0
+shot update.png "root@web-01: ~" 104 14 "$W_UPDATE"
+
 fresh "MODE=layered" "HOST_LABEL=lab-01" "CVE_CT=security"
 cp "$ROOT/examples/descriptions.incus-host" "$E/home/.config/sshlobby/descriptions"
 shot layered.png "root@lab-01: ~" 104 15 "$W_LAYERED"
-shot settings.png "root@lab-01: ~" 104 30 "$W_SETTINGS" e
+shot settings.png "root@lab-01: ~" 104 38 "$W_SETTINGS" e
 
 fresh
 shot setup.png "root@web-01: ~" 104 14 "$W_SETUP"

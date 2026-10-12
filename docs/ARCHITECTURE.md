@@ -17,15 +17,16 @@ functions, and **rendering lives only in the `_ui_render_*` and `_ui_tui_*` func
 | `lib/screens.sh` | Main menu per mode, CT screen, project screen, container screen, tools menu |
 | `lib/tools.sh` | Tool registry, shared tool helpers, the tools ported from v1.1 and the "Settings" entry |
 | `lib/setup.sh` | Mode detection (`setup_detect`), mode selection for the run (`mode_resolve`), setup screen (mode, display name `HOST_LABEL`, example descriptions) |
-| `lib/settings.sh` | Settings menu (key `e` in the main menu, `--settings`, `--reset`): mode, start behaviour, display, language, reset and restore with backups |
-| `lib/cli.sh` | Arguments, `--list`, `--go`, `--setup`, `--settings`, `--reset`, `--mode`, `pd_main` |
+| `lib/settings.sh` | Settings menu (key `e` in the main menu, `--settings`, `--reset`): mode, start behaviour, display, language, release check, reset and restore with backups |
+| `lib/update.sh` | Release check (`upd_auto` in the background once a day, cache `~/.config/sshlobby/update-check`), main menu hint and key `u` (`upd_banner`, `upd_tui`), `sshlobby update` (`cli_update`): download, archive check, `install.sh --update`, restore on failure |
+| `lib/cli.sh` | Arguments, `--list`, `--go`, `--setup`, `--settings`, `--reset`, `--mode`, `update`, `pd_main` |
 | `lib/tools_*.sh` | (optional) more tools, loaded automatically after all other modules and before `pd_main` runs |
 | `lang/*.txt` | All UI texts, one block per key with one line per language (format in the header of `lang/strings.txt`) |
 | `examples/descriptions.<name>` | Example descriptions. The setup offers all of them and preselects the one matching `hostname -s` |
 | `tools/dev/` | Developer tools: `screenshots.sh` (HTML preview of all screens, built from the test stubs), `ansi2html.py` |
 
 Load order: `core`, then `i18n_detect` and `i18n_load`, then `ui`, `backend_incus`,
-`backend_docker`, `screens`, `tools`, `setup`, `settings`, `cli`, then `tools_*.sh` in
+`backend_docker`, `screens`, `tools`, `setup`, `settings`, `update`, `cli`, then `tools_*.sh` in
 alphabetical order. All modules contain only function definitions and globals. Only `tools.sh`
 (and extensions) run `tool_register` while loading. Because the language is loaded before the
 other modules, `${TX[key]}` is available at load time, for example in `tool_register` calls.

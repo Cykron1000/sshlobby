@@ -21,6 +21,7 @@ pending updates.
 - [Modes](#modes)
 - [Server tools](#server-tools)
 - [Configuration](#configuration)
+- [Updates](#updates)
 - [Languages](#languages)
 - [Uninstall](#uninstall)
 - [Development](#development)
@@ -42,7 +43,8 @@ The screenshots are rendered from the test fixtures with `tools/dev/screenshots.
 
 Requirements: Linux, Bash 4.3 or newer, `jq`, `tput` (package `ncurses-bin`), `awk`, root access,
 and `docker` or `incus`. Optional: `tmux` (updates keep running if the connection drops),
-`systemctl` and `journalctl` (services and logs), `ss` (ports).
+`systemctl` and `journalctl` (services and logs), `ss` (ports), `curl` or `wget` (release check and
+`sshlobby update`).
 
 ```sh
 git clone https://github.com/Nikolai-Slsr/sshlobby.git
@@ -52,7 +54,8 @@ sudo ./install.sh
 
 `install.sh` copies the program to `/usr/local/lib/sshlobby/`, links `/usr/local/bin/sshlobby` and
 adds a marked block to `~/.bashrc` that starts the dashboard on SSH login. Running it again updates
-the program and leaves an up-to-date block alone. After `git pull`, run `sudo ./install.sh` again.
+the program and leaves an up-to-date block alone. Later versions install with `sudo sshlobby update`
+(see [Updates](#updates)); in a git checkout, run `git pull` and `sudo ./install.sh` again.
 
 The block only runs for interactive SSH logins with a terminal. `scp`, `sftp`, `ssh host command`
 and scripts are not affected. To skip the dashboard, set `SSHLOBBY_SKIP=1`, or press `s` in the
@@ -76,6 +79,7 @@ Coding agents find step-by-step instructions in [CLAUDE.md](CLAUDE.md).
 | `f` | add or remove a favorite (container, Incus container and service screens) |
 | `s` | normal shell on the host |
 | `e` | settings |
+| `u` | install a new release (only shown when one is available) |
 | `r` | reload |
 | `q` | log out (main menu) or back |
 
@@ -97,6 +101,7 @@ sshlobby --setup                 # choose the mode again
 sshlobby --settings              # open the settings
 sshlobby --reset                 # reset everything (with backup), then setup
 sshlobby --mode incus            # use a mode for this run only
+sshlobby update                  # install a new release (asks first), see Updates
 sshlobby --help
 sshlobby --version
 ```
@@ -162,6 +167,8 @@ file is parsed, never run as shell code. Unknown keys and invalid values are ign
 | `SSH_HOSTS` | host names | targets for "Other server (SSH)"; empty: hosts from `~/.ssh/config` |
 | `CVE_CT`, `CVE_DIR` | container, folder | Incus container and alert folder of a CVE monitor (default folder `/opt/cve-monitor/alerts`) |
 | `HERMES_SCAN_CTS` | `yes`, `no` | Hermes tool also looks inside Incus containers |
+| `UPDATE_CHECK` | `yes`, `no` | look for a new release once a day and show a hint in the main menu |
+| `UPDATE_REPO` | `owner/name` | GitHub repository whose releases `sshlobby update` installs (default `Nikolai-Slsr/sshlobby`) |
 
 Other files in `~/.config/sshlobby/`:
 
@@ -170,11 +177,45 @@ Other files in `~/.config/sshlobby/`:
 | `descriptions` | `name\|text` per project, container or Incus container, shown in the lists |
 | `favorites`, `recents` | favorites and history |
 | `backups/` | backups made before every reset (the newest 10), restorable from the settings |
+| `update-check` | result of the last release check (time, newest release); safe to delete |
 
 Example descriptions are in [`examples/`](examples/); the setup offers them.
 
 Environment variables: `SSHLOBBY_SKIP=1` (no dashboard), `SSHLOBBY_MODE`, `SSHLOBBY_UI=line`,
-`SSHLOBBY_LANG`, `NO_COLOR`.
+`SSHLOBBY_LANG`, `SSHLOBBY_UPDATE_CHECK=yes|no` (overrides `UPDATE_CHECK`; `yes` also checks when the
+menu runs without a terminal), `NO_COLOR`.
+
+## Updates
+
+![Main menu with the hint for a new release](docs/screenshots/update.png)
+
+Once a day, when the menu starts on a terminal, sshlobby asks GitHub for the newest release of
+`UPDATE_REPO`. The request runs in the background, so the login never waits for it. It is one HTTPS
+request to `api.github.com`; GitHub sees the server's IP address. Drafts, pre-releases and plain tags
+are ignored. Without a terminal (pipes, scripts) there is no automatic check.
+If a newer version exists, the main menu shows it with the key `u` from the next visit of the main menu
+on. Nothing is installed without your confirmation. `UPDATE_CHECK=no` (or "Look for new releases" in
+the settings) turns the check and the hint off.
+
+```sh
+sudo sshlobby update             # check now, show the release notes link, install after a question
+sudo sshlobby update --check     # only report; exit code 3 if a newer release exists
+sudo sshlobby update --yes       # install without the question (scripts)
+```
+
+Exit codes of `update`: 0 up to date or updated, 1 error, 3 newer release not installed.
+
+The update downloads the release archive of the tag over HTTPS (with `curl`, or `wget` if curl is
+missing) and checks it before anything changes: one root folder, only plain files and folders (no
+links, no absolute paths, no `..`), the version inside matches the tag, all scripts pass `bash -n`.
+Then it runs the release's own `install.sh --update` for the existing installation. That replaces the
+program and updates an existing login hook, but never adds one you removed. If the installation fails,
+or the new version does not report itself correctly afterwards, the previous version is put back. The
+temporary folder with the download and the backup is always deleted.
+
+`u` in the main menu and "Check now" in the settings do the same and restart sshlobby with the new
+version. A copy that runs from a git checkout (with `install.sh` next to it) is never replaced; update
+it with `git pull` and `sudo ./install.sh`.
 
 ## Languages
 

@@ -7,8 +7,10 @@
 set -u
 
 # shellcheck disable=SC2034 # VERSION und PD_EXAMPLES nutzen die Module
-VERSION="3.0.0"
+VERSION="3.0.1"
 PD_SELF=$(readlink -f "${BASH_SOURCE[0]}")
+# shellcheck disable=SC2034 # PD_CALLED: aufgerufener Pfad (meist der Starter-Symlink), braucht sshlobby update
+PD_CALLED=${BASH_SOURCE[0]}
 PD_LIB=${SSHLOBBY_LIB:-$(dirname "$PD_SELF")/lib}
 # shellcheck disable=SC2034
 PD_EXAMPLES=${SSHLOBBY_EXAMPLES:-$(dirname "$PD_LIB")/examples}
@@ -28,7 +30,7 @@ fi
 i18n_detect
 i18n_load
 
-for _m in ui backend_incus backend_docker screens tools setup settings cli; do
+for _m in ui backend_incus backend_docker screens tools setup settings update cli; do
   if [ ! -r "$PD_LIB/$_m.sh" ]; then printf 'sshlobby: missing module: %s\n' "$PD_LIB/$_m.sh" >&2; exit 1; fi
   # shellcheck source=/dev/null
   . "$PD_LIB/$_m.sh"

@@ -1,0 +1,186 @@
+# sshlobby language file: release check, update banner and "sshlobby update" (lib/update.sh).
+# Format: see the header of lang/strings.txt.
+
+# ─── command line ───
+
+[cli.usage.update]
+de = nach einem neuen Release suchen und es installieren (fragt vorher)
+en = look for a new release and install it (asks first)
+
+[cli.usage.update_check]
+de = nur nachsehen, nichts installieren
+en = only check, install nothing
+
+[cli.usage.update_yes]
+de = ohne Rückfrage installieren
+en = install without asking
+
+[cli.usage.update_exit]
+de = Exit-Codes update: 0 aktuell oder aktualisiert, 1 Fehler, 3 neues Release nicht installiert
+en = update exit codes: 0 up to date or updated, 1 error, 3 new release not installed
+
+[update.checking]
+de = Suche nach einem neuen Release von %s …
+en = Looking for a new release of %s …
+
+[update.checking_short]
+de = Suche nach einem neuen Release
+en = Looking for a new release
+
+[update.uptodate]
+de = sshlobby %s ist aktuell.
+en = sshlobby %s is up to date.
+
+[update.available]
+de = Neues Release: sshlobby %s (installiert: %s)
+en = New release: sshlobby %s (installed: %s)
+
+[update.notes]
+de = Änderungen: %s
+en = Release notes: %s
+
+[update.confirm]
+de = sshlobby %s jetzt installieren?
+en = Install sshlobby %s now?
+
+[update.declined]
+de = Nicht installiert. Später: sshlobby update
+en = Not installed. Later: sshlobby update
+
+[update.step.download]
+de = Lade %s …
+en = Downloading %s …
+
+[update.step.check]
+de = Prüfe das Archiv …
+en = Checking the archive …
+
+[update.step.install]
+de = Installiere nach %s …
+en = Installing to %s …
+
+[update.done]
+de = sshlobby aktualisiert: %s → %s
+en = sshlobby updated: %s → %s
+
+[update.restart]
+de = sshlobby startet mit der neuen Version neu.
+en = sshlobby restarts with the new version.
+
+# ─── main menu ───
+
+[update.banner.label]
+de = Neue Version
+en = New version
+
+[update.banner.text]
+de = installiert ist %s · Taste u oder: sshlobby update
+en = installed: %s · key u or: sshlobby update
+
+[update.key]
+de = Update installieren
+en = install update
+
+# ─── errors ───
+
+[update.err.tool]
+de = Für die Update-Prüfung fehlt curl oder wget
+en = The update check needs curl or wget
+
+[update.err.http]
+de = GitHub meldet einen Fehler: kein Release in %s oder Anfragelimit erreicht
+en = GitHub answered with an error: no release in %s, or the request limit is reached
+
+[update.err.net]
+de = GitHub nicht erreichbar (%s, Exit-Code %d)
+en = GitHub not reachable (%s, exit code %d)
+
+[update.err.answer]
+de = Unerwartete Antwort von GitHub (kein Versions-Tag)
+en = Unexpected answer from GitHub (no version tag)
+
+[update.err.tmp]
+de = Temporärer Ordner lässt sich nicht anlegen
+en = Cannot create a temporary folder
+
+[update.err.root]
+de = Aktualisieren braucht root: sudo sshlobby update
+en = Updating needs root: sudo sshlobby update
+
+[update.err.checkout]
+de = Diese Kopie läuft aus einem Quellordner (%s). Dort aktualisieren mit git pull und sudo ./install.sh.
+en = This copy runs from a source folder (%s). Update it there with git pull and sudo ./install.sh.
+
+[update.err.location]
+de = Unerwarteter Installationsort %s (erwartet: …/sshlobby). Bitte mit install.sh neu installieren.
+en = Unexpected install location %s (expected: …/sshlobby). Please reinstall with install.sh.
+
+[update.err.launcher]
+de = Kein Starter gefunden, der auf %s zeigt. Bitte mit install.sh neu installieren.
+en = No launcher found that points to %s. Please reinstall with install.sh.
+
+[update.err.archive]
+de = Archivprüfung fehlgeschlagen: %s. Nichts installiert.
+en = Archive check failed: %s. Nothing installed.
+
+[update.err.archive.read]
+de = Archiv nicht lesbar
+en = cannot read the archive
+
+[update.err.archive.paths]
+de = unsichere Einträge (absolute Pfade, .., Links oder mehrere Wurzeln)
+en = unsafe entries (absolute paths, .., links or more than one root folder)
+
+[update.err.archive.files]
+de = sshlobby.sh, install.sh, lib/ oder lang/ fehlt
+en = sshlobby.sh, install.sh, lib/ or lang/ is missing
+
+[update.err.archive.version]
+de = Release %s enthält Version %s
+en = release %s contains version %s
+
+[update.err.archive.syntax]
+de = Syntaxfehler in %s
+en = syntax error in %s
+
+[update.err.install]
+de = install.sh ist fehlgeschlagen (Exit-Code %d). Die vorherige Version ist wiederhergestellt.
+en = install.sh failed (exit code %d). The previous version has been restored.
+
+[update.err.restore]
+de = install.sh ist fehlgeschlagen (Exit-Code %d), die vorherige Version ließ sich nicht wiederherstellen. Bitte mit install.sh neu installieren.
+en = install.sh failed (exit code %d) and the previous version could not be restored. Please reinstall with install.sh.
+
+[update.err.verify]
+de = Nach der Installation meldet sich sshlobby mit „%s“ statt Version %s. Die vorherige Version ist wiederhergestellt.
+en = After the installation sshlobby reports "%s" instead of version %s. The previous version has been restored.
+
+# ─── settings ───
+
+[settings.group.updates]
+de = sshlobby-Updates
+en = sshlobby updates
+
+[settings.updcheck]
+de = Nach neuen Releases suchen
+en = Look for new releases
+
+[settings.updcheck.never]
+de = noch nie geprüft
+en = never checked
+
+[settings.updcheck.failed]
+de = letzte Prüfung fehlgeschlagen
+en = last check failed
+
+[settings.updcheck.last]
+de = geprüft %s
+en = checked %s
+
+[settings.updnow]
+de = Jetzt prüfen
+en = Check now
+
+[settings.updinstall]
+de = sshlobby %s installieren
+en = Install sshlobby %s
