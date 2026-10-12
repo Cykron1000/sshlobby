@@ -4,7 +4,19 @@
 # Migration von projdash (Vorgänger): alter Hook-Block wird an derselben Stelle ersetzt,
 # ~/.config/projdash nach ~/.config/sshlobby kopiert (Original bleibt), alte Programmdateien entfernt.
 # Pfade überschreibbar (z. B. für Tests): BIN_DST=… LIB_DST=… BASHRC=… CONF_DST=… OLD_BIN=… OLD_LIB=… OLD_CONF=…
+# --update (ruft sshlobby update auf): Programm ersetzen, einen vorhandenen Login-Hook aktualisieren, aber
+# keinen neuen anlegen (wer den Hook entfernt hat, bekommt ihn durch ein Update nicht zurück).
+# Spätere Releases müssen --update weiter annehmen: ältere Versionen rufen damit ihr install.sh auf.
 set -euo pipefail
+
+UPDATE=0
+for arg in "$@"; do
+  case "$arg" in
+    --update)  UPDATE=1;;
+    -h|--help) echo "Usage: sudo ./install.sh [--update]"; exit 0;;
+    *)         echo "✗ Unknown argument: $arg (usage: sudo ./install.sh [--update])" >&2; exit 2;;
+  esac
+done
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BIN_DST="${BIN_DST:-/usr/local/bin/sshlobby}"
@@ -68,31 +80,38 @@ fi
 EOF
 )
 
-touch "$BASHRC"
 starts=$(printf '%s\n%s' "$HOOK_START" "$OLD_STARTS")
 ends=$(printf '%s\n%s' "$HOOK_END" "$OLD_ENDS")
-n_start=$(grep -cxF "$starts" "$BASHRC" || true)
-n_end=$(grep -cxF "$ends" "$BASHRC" || true)
+n_start=0 n_end=0
+if [ -f "$BASHRC" ]; then
+  n_start=$(grep -cxF "$starts" "$BASHRC" || true)
+  n_end=$(grep -cxF "$ends" "$BASHRC" || true)
+fi
 if [ "$n_start" != "$n_end" ]; then
   echo "✗ $BASHRC: hook block without end marker, please fix by hand" >&2
   exit 1
 fi
 had_hook=0; [ "$n_start" -gt 0 ] && had_hook=1
-tmp=$(mktemp); trap 'rm -f "$tmp"' EXIT
-HOOK_BLOCK="$HOOK_BLOCK" STARTS="$starts" ENDS="$ends" awk '
-  BEGIN { n = split(ENVIRON["STARTS"], s, "\n"); for (i = 1; i <= n; i++) st[s[i]] = 1
-          n = split(ENVIRON["ENDS"], e, "\n");   for (i = 1; i <= n; i++) en[e[i]] = 1 }
-  ($0 in st) { skip = 1; if (!done) { print ENVIRON["HOOK_BLOCK"]; done = 1 }; next }
-  skip       { if ($0 in en) skip = 0; next }
-             { print }
-  END        { if (!done) print ENVIRON["HOOK_BLOCK"] }' "$BASHRC" > "$tmp"
-
-if cmp -s "$tmp" "$BASHRC"; then
-  echo "✓ Bashrc hook is up to date"
+if [ "$UPDATE" = 1 ] && [ "$had_hook" = 0 ]; then
+  echo "✓ No login hook in $BASHRC, none added (update)"
 else
-  cat "$tmp" > "$BASHRC" # Inhalt ersetzen, Symlink/Rechte der Bashrc bleiben
-  if [ "$had_hook" -eq 1 ]; then echo "✓ Bashrc hook updated: $BASHRC"
-  else echo "✓ Auto-start hook added: $BASHRC"; fi
+  touch "$BASHRC"
+  tmp=$(mktemp); trap 'rm -f "$tmp"' EXIT
+  HOOK_BLOCK="$HOOK_BLOCK" STARTS="$starts" ENDS="$ends" awk '
+    BEGIN { n = split(ENVIRON["STARTS"], s, "\n"); for (i = 1; i <= n; i++) st[s[i]] = 1
+            n = split(ENVIRON["ENDS"], e, "\n");   for (i = 1; i <= n; i++) en[e[i]] = 1 }
+    ($0 in st) { skip = 1; if (!done) { print ENVIRON["HOOK_BLOCK"]; done = 1 }; next }
+    skip       { if ($0 in en) skip = 0; next }
+               { print }
+    END        { if (!done) print ENVIRON["HOOK_BLOCK"] }' "$BASHRC" > "$tmp"
+
+  if cmp -s "$tmp" "$BASHRC"; then
+    echo "✓ Bashrc hook is up to date"
+  else
+    cat "$tmp" > "$BASHRC" # Inhalt ersetzen, Symlink/Rechte der Bashrc bleiben
+    if [ "$had_hook" -eq 1 ]; then echo "✓ Bashrc hook updated: $BASHRC"
+    else echo "✓ Auto-start hook added: $BASHRC"; fi
+  fi
 fi
 
 # 4) Vorgänger projdash entfernen: Starter (Symlink in OLD_LIB oder Einzeldatei mit projdash-Kennung)
@@ -107,6 +126,10 @@ if [ -f "$OLD_LIB/projdash.sh" ]; then
 fi
 
 echo
+if [ "$UPDATE" = 1 ]; then
+  echo "Done: $(sed -n 's/^VERSION="\([^"]*\)".*$/sshlobby \1/p' "$SCRIPT_DIR/sshlobby.sh" | head -n 1) installed."
+  exit 0
+fi
 echo "Done. The dashboard starts on the next SSH login (first start asks for the mode)."
 echo "Try it now:  sshlobby"
 echo "Skip it:     SSHLOBBY_SKIP=1  (as a prefix or exported in the shell)"

@@ -74,6 +74,8 @@ screen_settings() {
     have incus && ui_item item hermesct "${TX[settings.hermesct]}" "$(_set_onoff "$HERMES_SCAN_CTS")"
     ui_item item sshhosts "${TX[settings.sshhosts]}" "${SSH_HOSTS:-${TX[settings.sshhosts.default]}}"
     [ "$MODE" != docker ] && ui_item item cvect "${TX[settings.cvect]}" "${CVE_CT:-$off}"
+    ui_item header "" "${TX[settings.group.updates]}" "" main
+    _set_upd_items
     ui_item header "" "${TX[settings.group.reset]}" "" main
     ui_item item rerun "${TX[settings.rerun]}" "${TX[settings.rerun.desc]}"
     tf v settings.value.entries "$(_set_lines "$RECENTS")"; ui_item item clearrec "${TX[settings.clearrec]}" "$v"
@@ -110,6 +112,8 @@ settings_do() { # eintrag
     hermesct)  if [ "$HERMES_SCAN_CTS" = yes ]; then v=no; else v=yes; fi; _set_save HERMES_SCAN_CTS "$v";;
     sshhosts)  _set_sshhosts;;
     cvect)     _set_cvect;;
+    updcheck)  if [ "$UPDATE_CHECK" = yes ]; then v=no; else v=yes; fi; _set_save UPDATE_CHECK "$v";;
+    updnow)    upd_tui;;
     rerun)     setup_run && { cfg_load; cfg_apply; PD_RELOAD=1; }; return 0;;
     clearrec)  ui_confirm "$(t settings.clearrec.confirm "$(_set_lines "$RECENTS")")" || return 0
                rm -f "$RECENTS" && ui_note ok "${TX[settings.clearrec.done]}";;
@@ -188,6 +192,29 @@ _set_cvect() {
   if [ "$UI_INPUT" = "-" ]; then _set_save CVE_CT ""; return 0; fi
   if [[ $UI_INPUT =~ ^[A-Za-z0-9][A-Za-z0-9-]*$ ]]; then _set_save CVE_CT "$UI_INPUT"
   else ui_msg err "$(t settings.cvect.invalid "$UI_INPUT")"; fi
+}
+
+# Gruppe sshlobby-Updates: automatische Prüfung (mit Stand der letzten Prüfung) und „Jetzt prüfen“,
+# das zu „sshlobby X installieren“ wird, sobald ein neueres Release bekannt ist (lib/update.sh).
+_set_upd_items() {
+  local v s
+  upd_state
+  if [ "$UPDATE_CHECK" = yes ]; then
+    case "$UPD_C_STATUS" in
+      "")  s=${TX[settings.updcheck.never]};;
+      err) s=${TX[settings.updcheck.failed]};;
+      *)   tf s settings.updcheck.last "$(rel_time "$UPD_C_CHECKED")";;
+    esac
+    v="${TX[settings.value.on]} · $s"
+  else
+    v=${TX[settings.value.off]}
+  fi
+  ui_item item updcheck "${TX[settings.updcheck]}" "$v"
+  if [ -n "$UPD_C_TAG" ] && ver_gt "$UPD_C_TAG" "$VERSION"; then
+    tf v settings.updinstall "${UPD_C_TAG#[vV]}"; ui_item item updnow "$v" "github.com/$UPDATE_REPO"
+  else
+    ui_item item updnow "${TX[settings.updnow]}" "github.com/$UPDATE_REPO"
+  fi
 }
 
 _set_edit() { # datei: im Editor öffnen ($VISUAL, $EDITOR, nano, vi)

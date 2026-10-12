@@ -39,6 +39,9 @@ Every screen has the same layout across the full terminal width:
 - **Breadcrumb**: path of the open menus, the current title in bold. In the main menu it shows
   the dashboard title. The subtitle is dimmed and right-aligned. If it is too long, it is cut
   at the front with `…`.
+- **Info lines** (optional): label dimmed, value with cell styles. In the main menu this is where
+  the hint for a newer release appears (`New version  [sshlobby 3.1.0]  installed: 3.0.1 · key u
+  or: sshlobby update`, the version as a yellow pill), together with the hotkey `u` in the footer.
 - **List**: dimmed number, status dot, label, columns. The selection is a bar across the full
   width (256 colours: dark blue background; 8/16 colours: blue; no colours: reverse) plus the
   marker `❯`. Sections are coloured headings with a thin line.

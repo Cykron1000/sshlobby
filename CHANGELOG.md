@@ -2,6 +2,23 @@
 
 All notable changes to sshlobby. Versions follow [semantic versioning](https://semver.org/).
 
+## 3.0.1 (2026-10-12)
+
+- Release check: once a day sshlobby asks GitHub in the background whether a newer release exists
+  (one HTTPS request to `api.github.com`, the login does not wait for it). If there is one, the main menu
+  shows a line with the new version and the key `u`. Turn it off in the settings or with
+  `UPDATE_CHECK=no`.
+- `sshlobby update` checks right away, shows the release notes link and installs the new release after a
+  confirmation. `--check` only reports (exit code 3 if a newer release exists), `--yes` skips the question.
+  The download is checked before anything changes: one root folder, only plain files and folders, the
+  version inside matches the tag, no syntax errors. If the installation fails, the previous version is
+  restored. A copy that runs from a git checkout is never replaced.
+- Key `u` in the main menu and "Check now" in the settings do the same from the menu and restart sshlobby
+  with the new version.
+- New config keys `UPDATE_CHECK` and `UPDATE_REPO`, environment variable `SSHLOBBY_UPDATE_CHECK`.
+- `install.sh --update`: updates the program and an existing login hook, but does not add a hook that was
+  removed. `install.sh` now rejects unknown arguments.
+
 ## 3.0.0 (2026-10-12)
 
 First public release.

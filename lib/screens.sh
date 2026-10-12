@@ -75,6 +75,7 @@ count_cells() { # laufend gesamt unhealthy text → FMT: Zähler, Unhealthy-Pill
 
 # ─── Hauptmenü ─────────────────────────────────────────────────────────────
 screen_main() {
+  upd_auto                     # einmal pro Start: Release-Prüfung im Hintergrund, wenn fällig
   while true; do
     MAIN_SUB=""
     if [ "$MODE" = docker ]; then main_items_docker; else main_items_incus; fi
@@ -83,6 +84,7 @@ screen_main() {
     sys_stats
     UI_ROOT=1 UI_STYLE=main
     UI_KEYS=("s|${TX[screens.key.host_shell]}" "e|${TX[screens.key.settings]}" "r|${TX[screens.key.reload]}")
+    upd_banner                 # neueres Release bekannt: Hinweiszeile und Taste u
     if [ "$Q_ACTION" = shell ]; then UI_QUIT_LABEL=${TX[screens.main.quit_shell]}; else UI_QUIT_LABEL=${TX[screens.main.quit_logout]}; fi
     ui_menu "${HOST_LABEL^^}" "$MAIN_SUB"
     case "$UI_ACT" in
@@ -91,6 +93,7 @@ screen_main() {
       key)    case "$UI_SEL" in
                 s) return "$PD_EXIT_SHELL";;
                 e) screen_settings;;
+                u) upd_tui;;
               esac;;
       select) main_open "$UI_SEL";;
     esac

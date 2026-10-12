@@ -8,6 +8,7 @@
 PD_EXIT_OK=0
 PD_EXIT_ERR=1
 PD_EXIT_USAGE=2
+PD_EXIT_UPDATE=3    # sshlobby update: neueres Release gefunden, aber nicht installiert (--check, Nein)
 PD_EXIT_SHELL=10
 PD_EXIT_LOGOUT=20
 
@@ -88,12 +89,17 @@ mode_valid() { case "${1:-}" in docker|incus|layered) return 0;; esac; return 1;
 #   RECENT_MAX  0–10: Einträge unter „Zuletzt“, 0 = ausblenden, Default 5
 #   HERMES_SCAN_CTS  yes | no: Werkzeug Hermes-Instanzen durchsucht auch Incus-CTs, Default yes
 #   LANGUAGE    Sprachcode aus lang/*.txt (de, en, …), leer = Systemsprache (gelesen von i18n_detect)
+#   UPDATE_CHECK  yes | no: einmal am Tag nach einem neuen Release suchen und im Hauptmenü darauf
+#               hinweisen (SSHLOBBY_UPDATE_CHECK hat Vorrang; =yes prüft auch ohne Terminal), Default yes
+#   UPDATE_REPO GitHub-Repo owner/name, dessen Releases sshlobby update installiert
+UPD_DEFAULT_REPO="Nikolai-Slsr/sshlobby"
 cfg_load() {
   local line key val re_skip='^[[:space:]]*(#|$)' re_kv='^[[:space:]]*([A-Za-z_][A-Za-z0-9_]*)[[:space:]]*=(.*)$'
   local -a words ok
   CFG_MODE="" CFG_EXISTS=0 CFG_ERRORS=0
   HOST_LABEL="" CVE_CT="" CVE_DIR="/opt/cve-monitor/alerts" SSH_HOSTS=""
   LANG_PREF="" AUTOSTART=yes Q_ACTION=logout UI_PREF=auto COLOR_PREF=auto SYMBOLS_PREF=auto RECENT_MAX=5 HERMES_SCAN_CTS=yes
+  UPDATE_CHECK=yes UPDATE_REPO=$UPD_DEFAULT_REPO
   if [ -r "$CONF_FILE" ]; then
     CFG_EXISTS=1
     while IFS= read -r line || [ -n "$line" ]; do
@@ -120,10 +126,13 @@ cfg_load() {
         RECENT_MAX) [[ $val =~ ^([0-9]|10)$ ]] && RECENT_MAX=$val;;
         HERMES_SCAN_CTS) [[ $val =~ ^(yes|no)$ ]] && HERMES_SCAN_CTS=$val;;
         LANGUAGE)   [[ $val =~ ^[a-z]{2}$ ]] && LANG_PREF=$val;;
+        UPDATE_CHECK) [[ $val =~ ^(yes|no)$ ]] && UPDATE_CHECK=$val;;
+        UPDATE_REPO)  [[ $val =~ ^[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9_.][A-Za-z0-9_.-]*$ && $val != *..* ]] && UPDATE_REPO=$val;;
         *) ;; # unbekannter Key: ignorieren
       esac
     done < "$CONF_FILE"
   fi
+  case "${SSHLOBBY_UPDATE_CHECK:-}" in yes|no) UPDATE_CHECK=$SSHLOBBY_UPDATE_CHECK;; esac
   PD_HOST=$(hostname -s 2>/dev/null) || PD_HOST=""
   [ -n "$PD_HOST" ] || PD_HOST=server
   [ -n "$HOST_LABEL" ] || HOST_LABEL=$PD_HOST

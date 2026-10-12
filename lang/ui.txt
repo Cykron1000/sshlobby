@@ -30,8 +30,8 @@ en = sshlobby config: KEY=value, never run as shell code.
 # ─── command line ───
 
 [cli.usage.synopsis]
-de = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <ziel> | --setup | --settings | --reset | -h | --version]
-en = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <target> | --setup | --settings | --reset | -h | --version]
+de = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <ziel> | --setup | --settings | --reset | update [--check] [--yes] | -h | --version]
+en = Usage: sshlobby [--mode docker|incus|layered] [--list | --go <target> | --setup | --settings | --reset | update [--check] [--yes] | -h | --version]
 
 [cli.usage.noarg]
 de = (ohne Argument)

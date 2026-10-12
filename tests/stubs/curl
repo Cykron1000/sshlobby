@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Test-Stub für curl und wget (wget ist ein Symlink hierher): nie Netzwerk, Antworten aus Dateien.
+#   https://api.github.com/repos/<repo>/releases/latest      → $STUB_UPDATE_DIR/latest.json
+#   https://github.com/<repo>/archive/refs/tags/<tag>.tar.gz → $STUB_UPDATE_DIR/<tag>.tar.gz
+# Fehlt die Datei: Exit 22 (curl -f bei HTTP 404) bzw. 8 (wget: Fehlerantwort des Servers).
+# Ohne STUB_UPDATE_DIR: Exit 6 bzw. 4 (keine Verbindung). STUB_UPDATE_RC=<n>: jeder Aufruf endet mit n.
+# Aufrufe landen mit allen Argumenten in STUB_LOG.
+name=${0##*/}
+{ echo "== $name"; printf '  %s\n' "$@"; } >> "${STUB_LOG:-/dev/null}"
+out=- url=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -o|-O) out=$2; shift;;
+    -A|-U|-H|--connect-timeout|--max-time|--proto|--proto-redir|-w) shift;;   # Optionen mit Wert
+    --) shift; url=${1:-}; break;;
+    -*) ;;
+    *) url=$1;;
+  esac
+  shift
+done
+fail() { if [ "$name" = wget ]; then case "$1" in 22) exit 8;; 6) exit 4;; esac; fi; exit "$1"; }
+[ -n "${STUB_UPDATE_RC:-}" ] && exit "$STUB_UPDATE_RC"
+d=${STUB_UPDATE_DIR:-}
+[ -n "$d" ] || fail 6
+case "$url" in
+  https://api.github.com/repos/*/releases/latest)    src=$d/latest.json;;
+  https://github.com/*/archive/refs/tags/*.tar.gz)   src=$d/${url##*/};;
+  *) fail 22;;
+esac
+[ -f "$src" ] || fail 22
+if [ "$out" = - ]; then cat "$src"; else cp "$src" "$out"; fi

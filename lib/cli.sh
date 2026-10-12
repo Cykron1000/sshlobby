@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# cli.sh: Argumente, --list, --go, --setup und der Einstieg pd_main.
+# cli.sh: Argumente, --list, --go, --setup, update (→ cli_update in update.sh) und der Einstieg pd_main.
 
 usage() {
   local noarg go
@@ -17,9 +17,13 @@ ${TX[cli.usage.synopsis]}
   --settings        ${TX[cli.usage.settings]}
   --reset           ${TX[cli.usage.reset]}
   --mode <m>        ${TX[cli.usage.mode]}
+  update            ${TX[cli.usage.update]}
+    --check         ${TX[cli.usage.update_check]}
+    -y, --yes       ${TX[cli.usage.update_yes]}
   -h, --help        ${TX[cli.usage.help]}
   --version         ${TX[cli.usage.version]}
 ${TX[cli.usage.exit_codes]}
+${TX[cli.usage.update_exit]}
 EOF
 }
 usage_err() { usage >&2; exit "$PD_EXIT_USAGE"; }
@@ -100,7 +104,7 @@ cli_go() { # ziel
 
 # ─── Einstieg ──────────────────────────────────────────────────────────────
 pd_main() {
-  local action="" target="" mode_arg="" rc
+  local action="" target="" mode_arg="" rc upd_check=0 upd_yes=0
   set_action() { [ -z "$action" ] || usage_err; action=$1; }
   while [ $# -gt 0 ]; do
     case "$1" in
@@ -111,12 +115,17 @@ pd_main() {
       --reset)     set_action reset;;
       --mode)      [ $# -ge 2 ] || usage_err; mode_arg=$2; shift;;
       --mode=*)    mode_arg=${1#--mode=};;
+      update|--update) set_action update;;
+      --check)     upd_check=1;;
+      -y|--yes)    upd_yes=1;;
       -h|--help)   set_action help;;
       --version)   set_action version;;
       *)           usage_err;;
     esac
     shift
   done
+  # --check und --yes gibt es nur zusammen mit update
+  if [ "$action" != update ] && [ $((upd_check + upd_yes)) -gt 0 ]; then usage_err; fi
   case "$action" in
     help)    usage; exit 0;;
     version) echo "sshlobby $VERSION"; exit 0;;
@@ -133,6 +142,8 @@ pd_main() {
   unset SSHLOBBY_LOGIN
   if [ -z "$action" ] && [ "$from_login" = 1 ] && [ "$AUTOSTART" = no ]; then exit "$PD_EXIT_OK"; fi
   case "$action" in
+    update)
+      cli_update "$upd_check" "$upd_yes"; exit $?;;
     list|go)
       mode_resolve "$mode_arg" || exit "$PD_EXIT_USAGE"
       if [ "$action" = list ]; then cli_list; exit $?; fi
